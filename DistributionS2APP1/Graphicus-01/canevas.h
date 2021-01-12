@@ -16,8 +16,6 @@
 
 const int MAX_COUCHES = 5;
 
-using namespace std;
-
 class Canevas
 {
 public:
@@ -34,7 +32,7 @@ public:
    
    double aire();
    bool translater(int deltaX, int deltaY);
-   void afficher(ostream & s);
+   void afficher(std::ostream& s);
 
 private:
      Couche couches[MAX_COUCHES];

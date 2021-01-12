@@ -10,8 +10,6 @@
 #include <iostream>
 #include "canevas.h"
 
-using namespace std;
-
 class Tests
 {
 public:

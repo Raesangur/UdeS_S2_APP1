@@ -47,12 +47,12 @@ void Tests::tests_application()
 
 void Tests::tests_application_cas_01()
 {
-   cout << "TESTS APPLICATION (CAS 01)" << endl; 
+   std::cout << "TESTS APPLICATION (CAS 01)" << std::endl; 
    // Il faut ajouter les operations realisant ce scenario de test.
 }
 
 void Tests::tests_application_cas_02()
 {
-   cout << "TESTS APPLICATION (CAS 02)" << endl;  
+   std::cout << "TESTS APPLICATION (CAS 02)" << std::endl;  
     // Il faut ajouter les operations realisant ce scenario de test.
 }

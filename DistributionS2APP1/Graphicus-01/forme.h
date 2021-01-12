@@ -13,8 +13,6 @@
 #include <iostream>
 #include "coordonnee.h"
 
-using namespace std;
-
 class Forme
 {
 public:
@@ -24,7 +22,7 @@ public:
   Coordonnee getAncrage();
   void setAncrage(Coordonnee c);
   virtual double aire() = 0;
-  virtual void afficher(ostream & s) = 0;
+  virtual void afficher(std::ostream& s) = 0;
 protected:
 	Coordonnee ancrage;
 };

@@ -51,6 +51,6 @@ bool Canevas::translater(int deltaX, int deltaY)
    return true;
 }
 
-void Canevas::afficher(ostream & s)
+void Canevas::afficher(std::ostream& s)
 {
 }
