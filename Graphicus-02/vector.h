@@ -12,7 +12,10 @@ private:
 	Iterator m_end = nullptr;
 	size_t   m_capacity = 0;
 
-	void m_reallocate(size_t newCapacity);
+	void m_reallocate(size_t newCapacity)
+	{
+		ItemType* newData = new ItemType[newCapacity];
+	}
 
 public:
 	vector(size_t count);
