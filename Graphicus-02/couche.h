@@ -6,14 +6,14 @@
  *    canevas. La classe Couche gere un vecteur de pointeur de formes
  *    geometriques en accord avec les specifications de Graphicus.
  *    Ce fichier fait partie de la distribution de Graphicus.
-********/
+ ********/
 
 #ifndef COUCHE_H
 #define COUCHE_H
 
 class Couche
 {
-   // Classe a completer
+    // Classe a completer
 };
 
 #endif

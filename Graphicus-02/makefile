@@ -1,4 +1,4 @@
-#Makefile pour l'APP
+# Makefile pour l'APP
 
 # Génération de l'executable (nommé graphicus2.exe)
 executable: canevas.o couche.o forme.o graphicus.o tests.o coordonnee.h
