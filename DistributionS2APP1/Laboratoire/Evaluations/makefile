@@ -6,19 +6,19 @@ test-evaluation: test-evaluation.o Evaluation.o EvaluationReussiEchec.o Evaluati
 	g++ -o test-evaluation test-evaluation.o Evaluation.o EvaluationReussiEchec.o EvaluationChoixMultiples.o
 
 test-evaluation.o: test-evaluation.cpp EvaluationChoixMultiples.h
-  g++ test-evaluation.cpp -g -c
+	g++ test-evaluation.cpp -g -c
 
 EvaluationChoixMultiple.o: EvaluationChoixMultiple.cpp EvaluationChoixMultiple.h EvaluationReussiEchec.h Evaluation.h
-  g++ EvaluationChoixMultiple.cpp -g -c
+	g++ EvaluationChoixMultiple.cpp -g -c
 
 EvaluationReussiEchec.o: EvaluationReussiEchec.cpp EvaluationReussiEchec.h Evaluation.h
-  g++ EvaluationReussiEchec.cpp -g -c
+	g++ EvaluationReussiEchec.cpp -g -c
 
 Evaluations.o: Evaluations.cpp Evaluations.h
-  g++ Evaluations.cpp -g -c
+	g++ Evaluations.cpp -g -c
 #
 clean:
-	rm  -f *.o		
+	rm  -f *.o
 #
 # fin du makefile
 #

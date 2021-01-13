@@ -7,13 +7,15 @@ int main()
 {
    const int TAILLE = 20;
    TableauEntier nombres(TAILLE);
+   int table[TAILLE];
    int val, x;
-
+   val = 0;
    // Sauvegarde des 9 dans le tableau.
    // Affiche un asterisque si succes.
    for (x = 0; x < TAILLE ; x++)
    {
       nombres.setElement(x, 9);
+      table[x] = val++;
       cout << "* ";
    }
    cout << endl;
@@ -23,6 +25,7 @@ int main()
    {
       val = nombres.getElement(x);
       cout << val << " ";
+      cout << table[x] << endl;
    }
    cout << endl;
 

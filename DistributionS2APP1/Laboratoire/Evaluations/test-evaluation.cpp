@@ -30,15 +30,9 @@ int main()
    for (int count = 0; count < NUM_TESTS; count++)
    {
       cout << "Test #" << (count + 1) << ":\n";
-      afficher(tests[count]);
+      tests[count]->afficher();
       cout << endl;
    }
    return 0;
 }
 
-void afficher(const Evaluation * evaluation)
-{
-   cout << setprecision(1) << fixed;
-   cout << "Le score numerique est " << evaluation->getResultat() << "." << endl;
-   cout << "La cote est  " << evaluation->getCote() << "." << endl;
-}
