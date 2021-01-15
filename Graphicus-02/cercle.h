@@ -11,30 +11,38 @@
 #include <iostream>
 
 
-class Cercle
+class Cercle : public Forme
 {
-public
-    Cercle(int rayon = 1, Coordonnee ancrageCercle = {0, 0})
-    : ancrage{ancrageCercle}, m_rayon{rayon}
+public:
+    Cercle(double ray = 1, Coordonnee a = {0, 0}) : Forme{a.x, a.y}, m_rayon{ray}
     {
     }
     ~Cercle()
     {
     }
 
+    double getRayon() const
+    {
+        return m_rayon;
+    }
+    void setRayon(double ray)
+    {
+        m_rayon = ray;
+    }
+
     double aire() const override
     {
-        PI* m_rayon* m_rayon;
+        return 3.14159265358979323846264 * getRayon() * getRayon();
     }
     void afficher(std::ostream& s) const override
     {
-        s << "Cercle:\trayon = " << m_rayon << "\tPoint d'ancrage = {";
-        ancrage.afficher();
+        s << "Cercle:\trayon = " << getRayon() << "\tPoint d'ancrage = {";
+        ancrage.afficher(s);
         s << "}" << std::endl;
     }
 
-protected:
-    int m_rayon;
+private:
+    double m_rayon;
 };
 
 #endif

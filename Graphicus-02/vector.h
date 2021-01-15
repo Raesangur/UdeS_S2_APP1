@@ -61,6 +61,9 @@ private:
     }
 
 public:
+    vector() : m_begin(nullptr), m_end(nullptr), m_capacity(0)
+    {
+    }
     vector(size_t count)
     {
         m_reallocate(count);

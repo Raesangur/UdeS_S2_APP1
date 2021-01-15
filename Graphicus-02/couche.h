@@ -1,7 +1,7 @@
 /********
  * Fichier: couche.h
- * Auteurs: C.-A. Brunet
- * Date: 08 janvier 2018 (creation)
+ * Auteurs: Pascal-Emmanuel Lachance
+ * Date: 2021-01-15
  * Description: Declaration de la classe pour une couche dans un
  *    canevas. La classe Couche gere un vecteur de pointeur de formes
  *    geometriques en accord avec les specifications de Graphicus.
@@ -10,10 +10,17 @@
 
 #ifndef COUCHE_H
 #define COUCHE_H
+#include "vector.h"
+#include "forme.h"
+#include "cercle.h"
 
 class Couche
 {
-    // Classe a completer
+private:
+    vector<Forme*> formes;
+
+public:
+
 };
 
 #endif
