@@ -1,6 +1,7 @@
 #pragma once
 #include <algorithm>
 #include <cstddef>
+#include <type_traits>
 
 template<typename ItemType>
 class vector
@@ -39,6 +40,26 @@ private:
     }
 
 
+    void m_removeElements(Iterator itBegin, Iterator itEnd)
+    {
+        for(Iterator it = itBegin; it < itEnd; it++)
+        {
+            // Normalement, std::destroy devrait être utilisé, ou un allocator comme std::allocator
+            // pour pouvoir gérer la destruction des éléments et la déallocation.
+            if constexpr(std::is_pointer<ItemType>::value == true)
+            {
+                // Ne fonctionne pas si le pointeur pointe vers un tableau
+                // Undefined Behavior si le pointeur n'est pas alloué dynamiquement.
+                delete *it;
+            }
+            else
+            {
+                // Appelle destructeur sur tous les éléments qui sont excédentaires
+                it->~ItemType();
+            }
+        }
+    }
+
 public:
     vector(size_t count)
     {
@@ -73,13 +94,16 @@ public:
     ~vector()
     {
         clear();
-        delete[] begin();
+        delete[] m_begin;
     }
 
-
     // Opérateur d'indexation pour accès
-    ItemType& operator[](size_t index)
+    ItemType operator[](size_t index)
     {
+        if(index > size())
+        {
+            return ItemType();
+        }
         return m_begin[index];
     }
 
@@ -102,17 +126,17 @@ public:
     {
         return m_capacity;
     }
+    bool empty()
+    {
+        return size() == 0;
+    }
 
 
     void resize(size_t newSize)
     {
         if(newSize < size())
         {
-            for(Iterator it = m_begin + newSize; it < end(); it++)
-            {
-                // Appelle destructeur sur tous les éléments qui sont excédentaires
-                it->~ItemType();
-            }
+            m_removeElements(begin() + newSize, end());
         }
 
         m_end = m_begin + newSize;
@@ -133,10 +157,7 @@ public:
     // Réinitialise la taille à 0
     void clear()
     {
-        for(Iterator it = begin(); it < end(); it++)
-        {
-            it->~ItemType();
-        }
+        m_removeElements(begin(), end());
         m_end = begin();
     }
 
@@ -162,6 +183,24 @@ public:
 
     void pop_back(size_t count = 1)
     {
+        if(count > size())
+        {
+            return;
+        }
         resize(size() - count);
+    }
+
+    ItemType remove(size_t index)
+    {
+        if(index > size())
+        {
+            return ItemType();
+        }
+        ItemType temp = m_begin[index];
+        for(Iterator it = begin() + index; it < end() - 1; it++)
+        {
+            *it = *(it + 1);
+        }
+        m_begin[--m_end].~ItemType();
     }
 };
