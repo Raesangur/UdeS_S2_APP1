@@ -9,11 +9,18 @@
 
 #ifndef COORDONNEE_H
 #define COORDONNEE_H
+#include <iostream>
+
 
 struct Coordonnee
 {
     int x;
     int y;
+
+    void afficher(std::ostream& s) const
+    {
+        s << "x: " << x << "\ty: " << y;
+    }
 };
 
 #endif
