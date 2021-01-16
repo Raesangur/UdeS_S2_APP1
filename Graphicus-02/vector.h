@@ -1,7 +1,9 @@
 #pragma once
+#include "forme.h"
 #include <algorithm>
 #include <cstddef>
 #include <type_traits>
+#include <iostream>
 
 template<typename ItemType>
 class vector
@@ -61,6 +63,9 @@ private:
     }
 
 public:
+    vector() : m_begin(nullptr), m_end(nullptr), m_capacity(0)
+    {
+    }
     vector(size_t count)
     {
         m_reallocate(count);
@@ -98,7 +103,7 @@ public:
     }
 
     // Opérateur d'indexation pour accès
-    ItemType operator[](size_t index)
+    ItemType operator[](size_t index) const
     {
         if(index > size())
         {
@@ -107,26 +112,26 @@ public:
         return m_begin[index];
     }
 
-    Iterator begin()
+    Iterator begin() const
     {
         return m_begin;
     }
 
-    Iterator end()
+    Iterator end() const
     {
         return m_end;
     }
 
-    size_t size()
+    size_t size() const
     {
         return m_end - m_begin;
     }
 
-    size_t capacity()
+    size_t capacity() const
     {
         return m_capacity;
     }
-    bool empty()
+    bool empty() const
     {
         return size() == 0;
     }
@@ -201,6 +206,16 @@ public:
         {
             *it = *(it + 1);
         }
-        m_begin[--m_end].~ItemType();
+        m_end--;
+        m_begin[size()].~ItemType();
+    }
+
+    template<typename = std::enable_if<std::is_same<ItemType, Forme*>::value>>
+    void afficher(std::ostream& s) const
+    {
+        for(Iterator it = begin(); it < end(); it++)
+        {
+            (*it)->afficher(s);
+        }
     }
 };
