@@ -325,8 +325,8 @@ ItemType vector<ItemType, shouldDelete>::remove(size_t index)
 // Le keyword inline sert à indiquer que la définition sera présente dans plusieurs translation
 // units sans briser la one-definition-rule (on aurait du mettre la spécialisation de la template
 // dans un fichier .cpp, mais elle aurait été seule)
-template<>
-inline void vector<Forme*>::afficher(std::ostream& s) const
+template<bool shouldDelete>
+inline void vector<Forme*, shouldDelete>::afficher(std::ostream& s) const
 {
     for(Forme* fp : *this)
     {
