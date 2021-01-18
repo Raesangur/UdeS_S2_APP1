@@ -7,7 +7,9 @@
 #include <iostream>
 #include <type_traits>
 
-template<typename ItemType>
+vector<Couche>
+
+template<typename ItemType, bool shouldDelete = is_pointer<ItemType>::value>
 class vector
 {
 private:
@@ -105,19 +107,19 @@ void vector<ItemType>::m_reallocate()
 template<typename ItemType>
 void vector<ItemType>::m_removeElements(Iterator itBegin, Iterator itEnd)
 {
-    for(Iterator it = itBegin; it < itEnd; it++)
+    for (ItemType& item : *this)
     {
         // Normalement, std::destroy devrait être utilisé, ou un allocator comme std::allocator
         // pour pouvoir gérer la destruction des éléments et la déallocation.
-        if constexpr(std::is_pointer<ItemType>::value == true)
+        if constexpr(shouldDelete == true && std::is_pointer<ItemType>::value)
         {
             // Ne fonctionne pas si le pointeur pointe vers un tableau
             // Undefined Behavior si le pointeur n'est pas alloué dynamiquement.
-            delete *it;
+            delete item;
         }
         else
         {
-            it->~ItemType();
+            item.~ItemType();
         }
     }
 }
