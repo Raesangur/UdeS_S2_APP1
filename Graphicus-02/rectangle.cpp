@@ -28,11 +28,11 @@ double Rectangle::getHauteur() const
     return hauteur;
 }
 
-virtual double Rectangle::aire() const override
+double Rectangle::aire() const
 {
     return largeur * hauteur;
 }
-void Rectangle::afficher(std::ostream& s) const override
+void Rectangle::afficher(std::ostream& s) const
 {
     s << "Rectangle(";
     ancrage.afficher(s);

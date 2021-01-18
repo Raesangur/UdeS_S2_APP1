@@ -1,4 +1,6 @@
-#pragma once
+#ifndef VECTOR_H_
+#define VECTOR_H_
+
 #include "forme.h"
 #include <algorithm>
 #include <cstddef>
@@ -69,8 +71,7 @@ public:
     void     pop_back(size_t count = 1);
     ItemType remove(size_t index);
 
-    template<typename = std::enable_if<std::is_same<ItemType, Forme*>::value>>
-    void afficher(std::ostream& s) const;
+    inline void afficher(std::ostream& s) const;
 };
 
 
@@ -121,10 +122,6 @@ void vector<ItemType>::m_removeElements(Iterator itBegin, Iterator itEnd)
     }
 }
 
-template<typename ItemType>
-vector<ItemType>::vector() : m_begin(nullptr), m_end(nullptr), m_capacity(0)
-{
-}
 
 template<typename ItemType>
 vector<ItemType>::vector(size_t count)
@@ -171,8 +168,7 @@ vector<ItemType>::~vector()
 // Opérateur d'indexation pour accès
 // Activée si le type est un pointeur (SFINAE)
 template<typename ItemType>
-template<typename T                                                     = ItemType,
-         typename std::enable_if<std::is_pointer<T>::value, bool>::type = true>
+template<typename T, typename std::enable_if<std::is_pointer<T>::value, bool>::type>
 const T vector<ItemType>::operator[](size_t index) const
 {
     if(index >= size())
@@ -184,8 +180,7 @@ const T vector<ItemType>::operator[](size_t index) const
 
 // Activée si le type n'est pas un pointeur (SFINAE)
 template<typename ItemType>
-template<typename T                                                      = ItemType,
-         typename std::enable_if<!std::is_pointer<T>::value, bool>::type = true>
+template<typename T, typename std::enable_if<!std::is_pointer<T>::value, bool>::type>
 const T& vector<ItemType>::operator[](size_t index) const
 {
     if(index >= size())
@@ -195,12 +190,12 @@ const T& vector<ItemType>::operator[](size_t index) const
     return m_begin[index];
 }
 
-
 template<typename ItemType>
 ItemType& vector<ItemType>::operator[](size_t index)
 {
     return operator[](index);
 }
+
 
 template<typename ItemType>
 typename vector<ItemType>::Iterator vector<ItemType>::begin() const
@@ -266,7 +261,7 @@ void vector<ItemType>::clear()
 }
 
 template<typename ItemType>
-void vector<ItemType>::push_back(const ItemType& value, size_t count = 1)
+void vector<ItemType>::push_back(const ItemType& value, size_t count)
 {
     if(size() + count > capacity())
     {
@@ -287,7 +282,7 @@ void vector<ItemType>::push_back(const ItemType& value, size_t count = 1)
 }
 
 template<typename ItemType>
-void vector<ItemType>::pop_back(size_t count = 1)
+void vector<ItemType>::pop_back(size_t count)
 {
     if(count > size())
     {
@@ -314,13 +309,18 @@ ItemType vector<ItemType>::remove(size_t index)
     return temp;
 }
 
-// Méthode afficher qui n'existe que si le type est un Forme* (SFINAE)
-template<typename ItemType>
-template<typename = std::enable_if<std::is_same<ItemType, Forme*>::value>::type = true>
-void vector<ItemType>::afficher(std::ostream& s) const
+// Méthode afficher qui n'existe que si le type est un Forme* (spécialisation de template)
+// Le keyword inline sert à indiquer que la définition sera présente dans plusieurs translation
+// units sans briser la one-definition-rule (on aurait du mettre la spécialisation de la template
+// dans un fichier .cpp, mais elle aurait été seule)
+template<>
+inline void vector<Forme*>::afficher(std::ostream& s) const
 {
     for(Iterator it = begin(); it < end(); it++)
     {
         (*it)->afficher(s);
     }
 }
+
+
+#endif

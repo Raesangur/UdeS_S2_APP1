@@ -19,12 +19,12 @@ double Carre::getCote() const
     return cote;
 }
 
-double Carre::aire() const override
+double Carre::aire() const
 {
     return cote * cote;
 }
 
-void Carre::afficher(std::ostream& s) const override
+void Carre::afficher(std::ostream& s) const
 {
     s << "Carre(";
     ancrage.afficher(s);
