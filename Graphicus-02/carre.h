@@ -8,32 +8,14 @@
 class Carre : public Rectangle
 {
 public:
-
     Carre(double cote = 1, Coordonnee ancrage = {0, 0});
-
-
     ~Carre() = default;
 
-    void setCote(double valCote)
-    {
-        cote = valCote;
-    }
-    double getCote() const
-    {
-        return cote;
-    }
+    void   setCote(double valCote);
+    double getCote() const;
 
-    double aire() const override
-    {
-        return cote * cote;
-    }
-
-    void afficher(std::ostream & s) const override
-    {
-    	s << "Carre(";
-        ancrage.afficher(s);
-        s << "c=" << getCote() << ", aire=" << aire() << ")" << std::endl;
-    }
+    double aire() const override;
+    void   afficher(std::ostream& s) const override;
 
 private:
     double cote;

@@ -17,33 +17,16 @@ public:
     Cercle(double ray = 1, Coordonnee a = {0, 0}) : Forme{a.x, a.y}, m_rayon{ray}
     {
     }
-    ~Cercle()
-    {
-    }
+    ~Cercle() = default;
 
-    double getRayon() const
-    {
-        return m_rayon;
-    }
-    void setRayon(double ray)
-    {
-        m_rayon = ray;
-    }
+    double getRayon() const;
+    void   setRayon(double ray);
 
-    double aire() const override
-    {
-        return 3.14159265358979323846264 * getRayon() * getRayon();
-    }
-    void afficher(std::ostream& s) const override
-    {
-        s << "Cercle(";
-        ancrage.afficher(s);
-        s << "r=" << getRayon() << ", aire=" << aire() << ")" << std::endl;
-    }
+    double aire() const override;
+    void   afficher(std::ostream& s) const override;
 
 private:
     double m_rayon;
 };
 
 #endif
-

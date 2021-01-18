@@ -7,6 +7,7 @@
  ********/
 
 #include "canevas.h"
+#include <exception>
 
 Canevas::Canevas()
 {
@@ -43,6 +44,50 @@ bool Canevas::cacherCouche(size_t index)
     }
     m_couches[index].SetEtat(Couche::Etat::Cachee);
     return true;
+}
+
+bool Canevas::ajouterCouche(const Couche& couche)
+{
+    try
+    {
+        m_couches.push_back(Couche(couche));
+        return true;
+    }
+    catch(std::bad_alloc ex)    // Operator new throw une std::bad_alloc en cas d'échec (ne retourne
+                                // pas nullptr);
+    {
+        return false;
+    }
+}
+bool Canevas::enleverCouche(size_t index)
+{
+    if(index < nombreCouche())
+    {
+        m_couches.remove(index);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+size_t Canevas::nombreCouche() const
+{
+    return m_couches.size();
+}
+
+Couche& getCouche(size_t index) const
+{
+    // Retourne la couche en cours
+    if(index == (size_t)-1)
+    {
+         return m_couches[m_index];
+    }
+    else
+    {
+        return m_couches[index];
+    }
 }
 
 bool Canevas::ajouterForme(Forme* p_forme)
@@ -84,7 +129,7 @@ bool Canevas::translater(int deltaX, int deltaY)
 
 void Canevas::afficher(std::ostream& s)
 {
-    for (size_t i = 0; i < m_couches.size(); i++)
+    for(size_t i = 0; i < m_couches.size(); i++)
     {
         s << "----- Couche " << i << std::endl;
         m_couches[i].afficher(s);
