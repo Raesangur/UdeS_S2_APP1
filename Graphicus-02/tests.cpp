@@ -144,7 +144,7 @@ void Tests::tests_unitaires_canevas()
     c1.ajouterForme(new Cercle(3));
 
     c1.ajouterCouche(c1.getCouche(1));
-    c1.
+    //c1.
 }
 
 void Tests::tests_unitaires()
