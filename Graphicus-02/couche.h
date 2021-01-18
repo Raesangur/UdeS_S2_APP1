@@ -26,24 +26,6 @@ public:
         Active,
         Inactive,
         Cachee
-
-        operator std::string(Etat e)
-        {
-            switch(e)
-            {
-                case Init:
-                    return "Init";
-                case Active:
-                    return "Active";
-                case Inactive:
-                    return "Inactive";
-                case Cachee:
-                    return "Cachee";
-
-                default:
-                    return "Invalid state";
-            }
-        }
     };
 
 private:
@@ -57,6 +39,7 @@ public:
     bool   AjouterForme(Forme* pforme);
     Forme* RetirerForme(size_t index);
     Forme* GetForme(size_t index) const;
+    size_t NombreForme() const;
 
     double Aire() const;
     bool   Translater(int x, int y);

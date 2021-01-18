@@ -316,10 +316,14 @@ ItemType vector<ItemType>::remove(size_t index)
 template<>
 inline void vector<Forme*>::afficher(std::ostream& s) const
 {
-    for(Iterator it = begin(); it < end(); it++)
+    for(Forme* fp : *this)
     {
-        (*it)->afficher(s);
+        fp->afficher(s);
     }
+   // for(Iterator it = begin(); it < end(); it++)
+   // {
+   //     (*it)->afficher(s);
+   // }
 }
 
 
