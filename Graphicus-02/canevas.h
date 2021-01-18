@@ -9,12 +9,10 @@
 
 #ifndef DESSIN_H
 #define DESSIN_H
-
 #include "couche.h"
 #include "forme.h"
+#include "vector.h"
 #include <iostream>
-
-const int MAX_COUCHES = 5;
 
 class Canevas
 {
@@ -35,7 +33,8 @@ public:
     void   afficher(std::ostream& s);
 
 private:
-    Couche couches[MAX_COUCHES];
+    vector<Couche> m_couches{5};
+    size_t m_index = 0;
 };
 
 #endif

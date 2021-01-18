@@ -2,8 +2,8 @@
 #include "forme.h"
 #include <algorithm>
 #include <cstddef>
-#include <type_traits>
 #include <iostream>
+#include <type_traits>
 
 template<typename ItemType>
 class vector
@@ -56,7 +56,6 @@ private:
             }
             else
             {
-                // Appelle destructeur sur tous les éléments qui sont excédentaires
                 it->~ItemType();
             }
         }
@@ -103,13 +102,18 @@ public:
     }
 
     // Opérateur d'indexation pour accès
-    ItemType operator[](size_t index) const
+    const ItemType& operator[](size_t index) const
     {
         if(index > size())
         {
             return ItemType();
         }
         return m_begin[index];
+    }
+
+    ItemType& operator[](size_t index)
+    {
+        return operator[](index);
     }
 
     Iterator begin() const
@@ -208,6 +212,8 @@ public:
         }
         m_end--;
         m_begin[size()].~ItemType();
+
+        return temp;
     }
 
     template<typename = std::enable_if<std::is_same<ItemType, Forme*>::value>>

@@ -27,7 +27,7 @@ public:
 
 private:
     vector<Forme*> m_formes;
-    Etat           m_etat;
+    Etat           m_etat = Etat::Init;
 
 public:
     Couche()  = default;
@@ -35,12 +35,19 @@ public:
 
     bool AjouterForme(Forme* pforme)
     {
-        try
+        if(m_etat == Etat::Active)
         {
-            m_formes.push_back(pforme);
-            return true;
+            try
+            {
+                m_formes.push_back(pforme);
+                return true;
+            }
+            catch(std::bad_alloc& ex)
+            {
+                return false;
+            }
         }
-        catch(std::bad_alloc& ex)
+        else
         {
             return false;
         }
@@ -48,7 +55,14 @@ public:
 
     Forme* RetirerForme(size_t index)
     {
-        return m_formes.remove(index);
+        if(m_etat == Etat::Active)
+        {
+            return m_formes.remove(index);
+        }
+        else
+        {
+            return nullptr;
+        }
     }
     Forme* GetForme(size_t index) const
     {
@@ -57,16 +71,28 @@ public:
 
     double Aire() const
     {
-        double total = 0.0;
-        for(const Forme* f : m_formes)
+        if(m_etat == Etat::Cachee)
         {
-            total += f->aire();
+            return 0.0;
         }
-        return total;
+        else
+        {
+            double total = 0.0;
+            for(const Forme* f : m_formes)
+            {
+                total += f->aire();
+            }
+            return total;
+        }
     }
 
     bool Translater(int x, int y)
     {
+        if(m_etat != Etat::Active)
+        {
+            return false;
+        }
+
         if(m_formes.empty() == true)
         {
             return false;
@@ -80,6 +106,7 @@ public:
 
     bool Reinitialiser()
     {
+        m_etat = Etat::Init;
         if(m_formes.empty() == true)
         {
             return false;
@@ -93,9 +120,12 @@ public:
 
     void SetEtat(Etat nouvelEtat)
     {
-        m_etat = nouvelEtat;
+        if(m_etat != Etat::Init)
+        {
+            m_etat = nouvelEtat;
+        }
     }
-    Etat GetEtat()
+    Etat GetEtat() const
     {
         return m_etat;
     }
