@@ -7,11 +7,20 @@
  *    Ce fichier fait partie de la distribution de Graphicus.
  ********/
 
+#include <iostream>
+
+#include "carre.h"
+#include "cercle.h"
+#include "rectangle.h"
 #include "tests.h"
+
+
 
 void Tests::tests_unitaires_formes()
 {
     // Tests sur les formes geometriques
+    Cercle cer(3);
+    Rectangle rec(c
 }
 
 void Tests::tests_unitaires_vecteur()

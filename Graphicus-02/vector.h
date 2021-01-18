@@ -101,15 +101,32 @@ public:
         delete[] m_begin;
     }
 
+
+
     // Opérateur d'indexation pour accès
-    const ItemType& operator[](size_t index) const
+    // Activée si le type est un pointeur (SFINAE)
+    template<typename T = ItemType, typename std::enable_if<std::is_pointer<T>::value, bool>::type = true>
+    const T operator[](size_t index) const
     {
-        if(index > size())
+        if(index >= size())
         {
-            return ItemType();
+            return nullptr;
         }
         return m_begin[index];
     }
+
+    // Activée si le type n'est pas un pointeur (SFINAE)
+    template<typename T = ItemType, typename std::enable_if<!std::is_pointer<T>::value, bool>::type = true>
+    const T& operator[](size_t index) const
+    {
+        if(index >= size())
+        {
+            throw std::exception();
+        }
+        return m_begin[index];
+    }
+
+
 
     ItemType& operator[](size_t index)
     {

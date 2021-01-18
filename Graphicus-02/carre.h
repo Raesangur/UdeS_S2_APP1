@@ -2,12 +2,12 @@
 #include "forme.h"
 #include <cstddef>
 
-classe Carre : public Rectangle
+class Carre : public Rectangle
 {
 public:
     Carre();
     Carre(size_t cote, Coordonnee ancrage);
-    ~Carre();
+    ~Carre() = default;
 
     void setCote(size_t valCote)
     {
@@ -18,9 +18,9 @@ public:
         return cote;
     }
 
-    size_t aire() const override
+    double aire() const override
     {
-        size_t aire = cote * cote;
+        return cote * cote;
     }
 
     void afficher(std::ostream & s) const override

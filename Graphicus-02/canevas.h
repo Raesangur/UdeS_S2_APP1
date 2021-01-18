@@ -22,11 +22,11 @@ public:
 
     bool reinitialiser();
 
-    bool activerCouche(int index);
-    bool cacherCouche(int index);
+    bool activerCouche(size_t index);
+    bool cacherCouche(size_t index);
 
     bool ajouterForme(Forme* p_forme);
-    bool retirerForme(int index);
+    bool retirerForme(size_t index);
 
     double aire();
     bool   translater(int deltaX, int deltaY);

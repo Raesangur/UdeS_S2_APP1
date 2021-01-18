@@ -10,7 +10,7 @@ public:
     Rectangle();
     Rectangle(size_t L, size_t H, Coordonnee ptAncrage);
     // Destructeur
-    ~Rectangle();
+    ~Rectangle() = default;
     // Methodes get set
 
     void setLargeur(size_t l)
@@ -21,15 +21,15 @@ public:
     {
         hauteur = h;
     }
-    size_t getLargeur()
+    size_t getLargeur() const
     {
         return largeur;
     }
-    size_t getHauteur()
+    size_t getHauteur() const
     {
         return hauteur;
     }
-    size_t aire() const override
+    double aire() const override
     {
         return largeur * hauteur;
     }
@@ -37,8 +37,7 @@ public:
     {
         s << "Rectangle(";
         ancrage.afficher(s);
-        s << "l=" << getLargeur() << ", h=" << getHauteur << ", aire=" << aire() << ")"
-          << std::endl;
+        s << "l=" << getLargeur() << ", h=" << getHauteur() << ", aire=" << aire() << ")" << std::endl;
     }
     // getAncrage(); et setAncrage(Coordonnee c); **Methodes heritees**
 
@@ -47,3 +46,4 @@ private:
     size_t hauteur;
     // Coordonnee ancrage; en protected herite de la classe Forme
 };
+

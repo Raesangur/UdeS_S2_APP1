@@ -23,7 +23,7 @@ bool Canevas::reinitialiser()
     return true;
 }
 
-bool Canevas::activerCouche(int index)
+bool Canevas::activerCouche(size_t index)
 {
     if(index > m_couches.size())
     {
@@ -35,7 +35,7 @@ bool Canevas::activerCouche(int index)
     return true;
 }
 
-bool Canevas::cacherCouche(int index)
+bool Canevas::cacherCouche(size_t index)
 {
     if(index > m_couches.size())
     {
@@ -50,7 +50,7 @@ bool Canevas::ajouterForme(Forme* p_forme)
     return m_couches[m_index].AjouterForme(p_forme);
 }
 
-bool Canevas::retirerForme(int index)
+bool Canevas::retirerForme(size_t index)
 {
     return m_couches[m_index].RetirerForme(index);
 }
@@ -84,9 +84,9 @@ bool Canevas::translater(int deltaX, int deltaY)
 
 void Canevas::afficher(std::ostream& s)
 {
-    for(const Couche& c : m_couches)
+    for (size_t i = 0; i < m_couches.size(); i++)
     {
-        c.afficher(s);
-        s << std::endl;
+        s << "----- Couche " << i << std::endl;
+        m_couches[i].afficher(s);
     }
 }

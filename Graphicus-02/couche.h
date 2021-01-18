@@ -133,7 +133,21 @@ public:
 
     void afficher(std::ostream& s) const
     {
-        m_formes.afficher(s);
+        if(m_etat != Etat::Init)
+        {
+            if(m_formes.size() == 0)
+            {
+                s << "Couche vide" << std::endl;
+            }
+            else
+            {
+                m_formes.afficher(s);
+            }
+        }
+        else
+        {
+            s << "Couche initialisee" << std::endl;
+        }
     }
 };
 
