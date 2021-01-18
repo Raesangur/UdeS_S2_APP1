@@ -44,6 +44,11 @@ Forme* Couche::GetForme(size_t index) const
     return m_formes[index];
 }
 
+size_t Couche::NombreForme() const
+{
+    return m_formes.size();
+}
+
 double Couche::Aire() const
 {
     if(m_etat == Etat::Cachee)
@@ -95,10 +100,7 @@ bool Couche::Reinitialiser()
 
 void Couche::SetEtat(Etat nouvelEtat)
 {
-    if(m_etat != Etat::Init)
-    {
-        m_etat = nouvelEtat;
-    }
+    m_etat = nouvelEtat;
 }
 Couche::Etat Couche::GetEtat() const
 {

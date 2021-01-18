@@ -39,6 +39,7 @@ public:
     bool   AjouterForme(Forme* pforme);
     Forme* RetirerForme(size_t index);
     Forme* GetForme(size_t index) const;
+    size_t NombreForme() const;
 
     double Aire() const;
     bool   Translater(int x, int y);

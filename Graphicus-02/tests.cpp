@@ -54,7 +54,31 @@ void Tests::tests_unitaires_vecteur()
 
 void Tests::tests_unitaires_couche()
 {
+    std::cout << "\nTests sur couche:\n----------------------" << std::endl; 
     // Tests sur la classe Couche
+    Couche c1;
+    c1.SetEtat(Couche::Etat::Active);
+    c1.AjouterForme(new Rectangle(10, 10));
+    c1.AjouterForme(new Cercle(4, {0, 1}));
+    c1.AjouterForme(new Rectangle);
+    c1.AjouterForme(new Carre(5));
+    c1.AjouterForme(c1.RetirerForme(0));
+    c1.AjouterForme(new Cercle(*dynamic_cast<Cercle*>(c1.GetForme(0))));
+    dynamic_cast<Cercle*>(c1.GetForme(c1.NombreForme() - 1))->setRayon(2);
+    std::cout << "Aire: " << c1.Aire() << ", pour " << c1.NombreForme() << " elements" << std::endl;
+    c1.afficher(std::cout);
+
+    std::cout << "\nTranslation de 5x - 2y:" << std::endl;
+    c1.Translater(5, -2);
+    c1.afficher(std::cout);
+
+    std::cout << "\nCacher la couche:" << std::endl;
+    c1.SetEtat(Couche::Etat::Cachee);
+    c1.afficher(std::cout);
+
+    std::cout << "\nReset de la couche:" << std::endl;
+    c1.Reinitialiser();
+    c1.afficher(std::cout);
 }
 
 void Tests::tests_unitaires_canevas()
