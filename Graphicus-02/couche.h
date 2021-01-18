@@ -33,122 +33,18 @@ public:
     Couche()  = default;
     ~Couche() = default;
 
-    bool AjouterForme(Forme* pforme)
-    {
-        if(m_etat == Etat::Active)
-        {
-            try
-            {
-                m_formes.push_back(pforme);
-                return true;
-            }
-            catch(std::bad_alloc& ex)
-            {
-                return false;
-            }
-        }
-        else
-        {
-            return false;
-        }
-    }
+    bool   AjouterForme(Forme* pforme);
+    Forme* RetirerForme(size_t index);
+    Forme* GetForme(size_t index) const;
 
-    Forme* RetirerForme(size_t index)
-    {
-        if(m_etat == Etat::Active)
-        {
-            return m_formes.remove(index);
-        }
-        else
-        {
-            return nullptr;
-        }
-    }
-    Forme* GetForme(size_t index) const
-    {
-        return m_formes[index];
-    }
+    double Aire() const;
+    bool   Translater(int x, int y);
+    bool   Reinitialiser();
 
-    double Aire() const
-    {
-        if(m_etat == Etat::Cachee)
-        {
-            return 0.0;
-        }
-        else
-        {
-            double total = 0.0;
-            for(const Forme* f : m_formes)
-            {
-                total += f->aire();
-            }
-            return total;
-        }
-    }
+    void SetEtat(Etat nouvelEtat);
+    Etat GetEtat() const;
 
-    bool Translater(int x, int y)
-    {
-        if(m_etat != Etat::Active)
-        {
-            return false;
-        }
-
-        if(m_formes.empty() == true)
-        {
-            return false;
-        }
-        for(Forme* f : m_formes)
-        {
-            f->translater(x, y);
-        }
-        return true;
-    }
-
-    bool Reinitialiser()
-    {
-        m_etat = Etat::Init;
-        if(m_formes.empty() == true)
-        {
-            return false;
-        }
-        else
-        {
-            m_formes.clear();
-            return true;
-        }
-    }
-
-    void SetEtat(Etat nouvelEtat)
-    {
-        if(m_etat != Etat::Init)
-        {
-            m_etat = nouvelEtat;
-        }
-    }
-    Etat GetEtat() const
-    {
-        return m_etat;
-    }
-
-
-    void afficher(std::ostream& s) const
-    {
-        if(m_etat != Etat::Init)
-        {
-            if(m_formes.size() == 0)
-            {
-                s << "Couche vide" << std::endl;
-            }
-            else
-            {
-                m_formes.afficher(s);
-            }
-        }
-        else
-        {
-            s << "Couche initialisee" << std::endl;
-        }
-    }
+    void afficher(std::ostream& s) const;
 };
 
 #endif

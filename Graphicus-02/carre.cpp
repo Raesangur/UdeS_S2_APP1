@@ -9,3 +9,24 @@ Carre::Carre(double cote, Coordonnee ptAncrage)
     setCote(cote);
     setAncrage(ptAncrage);
 }
+
+void Carre::setCote(double valCote)
+{
+    cote = valCote;
+}
+double Carre::getCote() const
+{
+    return cote;
+}
+
+double Carre::aire() const override
+{
+    return cote * cote;
+}
+
+void Carre::afficher(std::ostream& s) const override
+{
+    s << "Carre(";
+    ancrage.afficher(s);
+    s << "c=" << getCote() << ", aire=" << aire() << ")" << std::endl;
+}
