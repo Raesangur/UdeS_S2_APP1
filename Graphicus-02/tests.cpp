@@ -25,7 +25,7 @@ void Tests::tests_unitaires_formes()
     Cercle cer(3);
     Rectangle rec(cer.getRayon(), 9, {1, 1});
     Carre car(3, {0, 4});
-    
+
     std::cout<<"Affichage des formes instanciees:\n----"<<std::endl;
     car.afficher(std::cout);
     rec.afficher(std::cout);
@@ -85,8 +85,8 @@ void Tests::tests_unitaires_vecteur()
 
     std::cout<<"\nTest 5:\nConstruire une copie de ce vecteur"<<std::endl;
     vector<Forme*> v2(v1);
-    v2.afficher(std::cout); 
-   
+    v2.afficher(std::cout);
+
     std::cout<<"\nTest 6:\nVider le vecteur"<<std::endl;
     v1.clear();
     std::cout<<"\nAffichage:\n"<<std::endl;
@@ -97,7 +97,7 @@ void Tests::tests_unitaires_vecteur()
 
 void Tests::tests_unitaires_couche()
 {
-    std::cout << "\n\nTests sur couche:\n----------------------" << std::endl; 
+    std::cout << "\n\nTests sur couche:\n----------------------" << std::endl;
     // Tests sur la classe Couche
     Couche c1;
     c1.SetEtat(Couche::Etat::Active);
@@ -132,19 +132,19 @@ void Tests::tests_unitaires_canevas()
     std::cout << "Canevas de " << c1.nombreCouche() << " couches" << std::endl;
 
     c1.activerCouche(0);
-    c1.ajouterForme(new Rectangle(1, 1, {2, 3});
+    c1.ajouterForme(new Rectangle(1, 1, {2, 3}));
     c1.ajouterForme(new Carre(3));
-    c1.ajouterForme(new Cercle(r, {7, 8});
+    c1.ajouterForme(new Cercle(6, {7, 8}));
 
     c1.cacherCouche(1);
 
     c1.activerCouche(2);
-    c1.ajouterForme(new Rectangle(3, 4, {5, 6});
-    c1.ajouterForme(new Carre(1, {3, 4});
+    c1.ajouterForme(new Rectangle(3, 4, {5, 6}));
+    c1.ajouterForme(new Carre(1, {3, 4}));
     c1.ajouterForme(new Cercle(3));
 
     c1.ajouterCouche(c1.getCouche(1));
-    c1.
+   // c1.
 }
 
 void Tests::tests_unitaires()
