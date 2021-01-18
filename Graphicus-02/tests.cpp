@@ -20,7 +20,31 @@ void Tests::tests_unitaires_formes()
 {
     // Tests sur les formes geometriques
     Cercle cer(3);
-    Rectangle rec(c
+    Rectangle rec(cer.getRayon(), 9, {1, 1});
+    Carre car(3, {0, 4});
+
+    car.afficher(std::cout);
+    rec.afficher(std::cout);
+    cer.afficher(std::cout);
+
+    std::cout << "----\n";
+
+    Forme* pcer = new Cercle(cer);
+    Forme* prec = new Rectangle(rec);
+    Forme* pcar = new Carre(car);
+
+    pcer->afficher(std::cout);
+    prec->afficher(std::cout);
+    pcar->afficher(std::cout);
+
+    std::cout << "----\n";
+
+    dynamic_cast<Cercle*>(pcer)->setRayon(5);
+    pcer->afficher(std::cout);
+
+    delete pcer;
+    delete prec;
+    delete pcar;
 }
 
 void Tests::tests_unitaires_vecteur()

@@ -1,8 +1,8 @@
 # Makefile pour l'APP
 
 # Génération de l'executable (nommé graphicus2.exe)
-executable: canevas.o couche.o forme.o graphicus.o tests.o coordonnee.h
-	g++ -o graphicus2.exe canevas.o couche.o forme.o graphicus.o tests.o
+executable: canevas.o couche.o forme.o graphicus.o tests.o coordonnee.h carre.o rectangle.o cercle.o
+	g++ -o graphicus2.exe canevas.o couche.o forme.o graphicus.o tests.o rectangle.o carre.o cercle.o
 
 
 # Génération du fichier objet pour canevas
