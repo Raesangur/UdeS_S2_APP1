@@ -36,9 +36,9 @@ public:
     }
     void afficher(std::ostream& s) const override
     {
-        s << "Cercle:\trayon = " << getRayon() << "\tPoint d'ancrage = {";
+        s << "Cercle(";
         ancrage.afficher(s);
-        s << "}" << std::endl;
+        s << "r=" << getRayon() << ", aire=" << aire() << ")" << std::endl;
     }
 
 private:

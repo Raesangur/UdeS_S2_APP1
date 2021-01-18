@@ -19,7 +19,7 @@ struct Coordonnee
 
     void afficher(std::ostream& s) const
     {
-        s << "x: " << x << "\ty: " << y;
+        s << "x=" << x << ", y=" << y;
     }
 };
 
