@@ -9,8 +9,8 @@
 
 vector<Couche>
 
-template<typename ItemType, bool shouldDelete = is_pointer<ItemType>::value>
-class vector
+  template<typename ItemType, bool shouldDelete = is_pointer<ItemType>::value>
+  class vector
 {
 private:
     using Iterator = ItemType*;
@@ -99,15 +99,15 @@ void vector<ItemType, shouldDelete>::m_reallocate(size_t newCapacity)
 }
 
 template<typename ItemType, bool shouldDelete>
-void vector<ItemType>::m_reallocate()
+void vector<ItemType, shouldDelete>::m_reallocate()
 {
     m_reallocate(m_capacity * 2);
 }
 
 template<typename ItemType, bool shouldDelete>
-void vector<ItemType>::m_removeElements(Iterator itBegin, Iterator itEnd)
+void vector<ItemType, shouldDelete>::m_removeElements(Iterator itBegin, Iterator itEnd)
 {
-    for (ItemType& item : *this)
+    for(ItemType& item : *this)
     {
         // Normalement, std::destroy devrait être utilisé, ou un allocator comme std::allocator
         // pour pouvoir gérer la destruction des éléments et la déallocation.
@@ -126,7 +126,7 @@ void vector<ItemType>::m_removeElements(Iterator itBegin, Iterator itEnd)
 
 
 template<typename ItemType, bool shouldDelete>
-vector<ItemType>::vector(size_t count)
+vector<ItemType, shouldDelete>::vector(size_t count)
 {
     m_reallocate(count);
     resize(count);
@@ -134,7 +134,7 @@ vector<ItemType>::vector(size_t count)
 
 // Vecteur avec sa taille et assigne value a tous ses éléments
 template<typename ItemType, bool shouldDelete>
-vector<ItemType>::vector(size_t count, const ItemType& value)
+vector<ItemType, shouldDelete>::vector(size_t count, const ItemType& value)
 {
     m_reallocate(count);
     resize(count);
@@ -146,7 +146,7 @@ vector<ItemType>::vector(size_t count, const ItemType& value)
 
 // Copy constructor
 template<typename ItemType, bool shouldDelete>
-vector<ItemType>::vector(const vector& other)
+vector<ItemType, shouldDelete>::vector(const vector& other)
 {
     m_reallocate(other.capacity());
     resize(other.size());
@@ -159,7 +159,7 @@ vector<ItemType>::vector(const vector& other)
 
 // Destructeur
 template<typename ItemType, bool shouldDelete>
-vector<ItemType>::~vector()
+vector<ItemType, shouldDelete>::~vector()
 {
     clear();
     delete[] m_begin;
@@ -171,7 +171,7 @@ vector<ItemType>::~vector()
 // Activée si le type est un pointeur (SFINAE)
 template<typename ItemType, bool shouldDelete>
 template<typename T, typename std::enable_if<std::is_pointer<T>::value, bool>::type>
-const T vector<ItemType>::operator[](size_t index) const
+const T vector<ItemType, shouldDelete>::operator[](size_t index) const
 {
     if(index >= size())
     {
@@ -183,7 +183,7 @@ const T vector<ItemType>::operator[](size_t index) const
 // Activée si le type n'est pas un pointeur (SFINAE)
 template<typename ItemType, bool shouldDelete>
 template<typename T, typename std::enable_if<!std::is_pointer<T>::value, bool>::type>
-const T& vector<ItemType>::operator[](size_t index) const
+const T& vector<ItemType, shouldDelete>::operator[](size_t index) const
 {
     if(index >= size())
     {
@@ -193,44 +193,44 @@ const T& vector<ItemType>::operator[](size_t index) const
 }
 
 template<typename ItemType, bool shouldDelete>
-ItemType& vector<ItemType>::operator[](size_t index)
+ItemType& vector<ItemType, shouldDelete>::operator[](size_t index)
 {
     return operator[](index);
 }
 
 
 template<typename ItemType, bool shouldDelete>
-typename vector<ItemType>::Iterator vector<ItemType>::begin() const
+typename vector<ItemType, shouldDelete>::Iterator vector<ItemType, shouldDelete>::begin() const
 {
     return m_begin;
 }
 
 template<typename ItemType, bool shouldDelete>
-typename vector<ItemType>::Iterator vector<ItemType>::end() const
+typename vector<ItemType, shouldDelete>::Iterator vector<ItemType, shouldDelete>::end() const
 {
     return m_end;
 }
 
 template<typename ItemType, bool shouldDelete>
-size_t vector<ItemType>::size() const
+size_t vector<ItemType, shouldDelete>::size() const
 {
     return m_end - m_begin;
 }
 
 template<typename ItemType, bool shouldDelete>
-size_t vector<ItemType>::capacity() const
+size_t vector<ItemType, shouldDelete>::capacity() const
 {
     return m_capacity;
 }
 
 template<typename ItemType, bool shouldDelete>
-bool vector<ItemType>::empty() const
+bool vector<ItemType, shouldDelete>::empty() const
 {
     return size() == 0;
 }
 
 template<typename ItemType, bool shouldDelete>
-void vector<ItemType>::resize(size_t newSize)
+void vector<ItemType, shouldDelete>::resize(size_t newSize)
 {
     if(newSize < size())
     {
@@ -241,13 +241,13 @@ void vector<ItemType>::resize(size_t newSize)
 }
 
 template<typename ItemType, bool shouldDelete>
-void vector<ItemType>::reserve(size_t capacity)
+void vector<ItemType, shouldDelete>::reserve(size_t capacity)
 {
     m_reallocate(capacity);
 }
 
 template<typename ItemType, bool shouldDelete>
-void vector<ItemType>::shrink_to_fit()
+void vector<ItemType, shouldDelete>::shrink_to_fit()
 {
     m_reallocate(size());
 }
@@ -256,14 +256,14 @@ void vector<ItemType>::shrink_to_fit()
 // Appelle le destructeur sur tous les éléments
 // Réinitialise la taille à 0
 template<typename ItemType, bool shouldDelete>
-void vector<ItemType>::clear()
+void vector<ItemType, shouldDelete>::clear()
 {
     m_removeElements(begin(), end());
     m_end = begin();
 }
 
 template<typename ItemType, bool shouldDelete>
-void vector<ItemType>::push_back(const ItemType& value, size_t count)
+void vector<ItemType, shouldDelete>::push_back(const ItemType& value, size_t count)
 {
     if(size() + count > capacity())
     {
@@ -284,7 +284,7 @@ void vector<ItemType>::push_back(const ItemType& value, size_t count)
 }
 
 template<typename ItemType, bool shouldDelete>
-void vector<ItemType>::pop_back(size_t count)
+void vector<ItemType, shouldDelete>::pop_back(size_t count)
 {
     if(count > size())
     {
@@ -294,7 +294,7 @@ void vector<ItemType>::pop_back(size_t count)
 }
 
 template<typename ItemType, bool shouldDelete>
-ItemType vector<ItemType>::remove(size_t index)
+ItemType vector<ItemType, shouldDelete>::remove(size_t index)
 {
     if(index > size())
     {
@@ -322,10 +322,10 @@ inline void vector<Forme*>::afficher(std::ostream& s) const
     {
         fp->afficher(s);
     }
-   // for(Iterator it = begin(); it < end(); it++)
-   // {
-   //     (*it)->afficher(s);
-   // }
+    // for(Iterator it = begin(); it < end(); it++)
+    // {
+    //     (*it)->afficher(s);
+    // }
 }
 
 
