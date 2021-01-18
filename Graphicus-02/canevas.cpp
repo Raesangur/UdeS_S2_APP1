@@ -53,8 +53,8 @@ bool Canevas::ajouterCouche(const Couche& couche)
         m_couches.push_back(Couche(couche));
         return true;
     }
-    catch(std::bad_alloc ex)    // Operator new throw une std::bad_alloc en cas d'échec (ne retourne
-                                // pas nullptr);
+    catch(const std::bad_alloc& ex)    // Operator new throw une std::bad_alloc en cas d'échec (ne
+                                       // retourne pas nullptr);
     {
         return false;
     }
@@ -77,12 +77,12 @@ size_t Canevas::nombreCouche() const
     return m_couches.size();
 }
 
-Couche& getCouche(size_t index) const
+const Couche& Canevas::getCouche(size_t index) const
 {
     // Retourne la couche en cours
     if(index == (size_t)-1)
     {
-         return m_couches[m_index];
+        return m_couches[m_index];
     }
     else
     {

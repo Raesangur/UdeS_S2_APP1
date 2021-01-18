@@ -24,13 +24,13 @@ public:
 
     bool   activerCouche(size_t index);
     bool   cacherCouche(size_t index);
-    bool   ajouterCouche(Couche* couche);
+    bool   ajouterCouche(const Couche& couche);
     bool   enleverCouche(size_t index);
     size_t nombreCouche() const;
 
-    bool ajouterForme(Forme* p_forme);
-    bool retirerForme(size_t index);
-    Couche& getCouche(size_t index = -1) const;
+    bool          ajouterForme(Forme* p_forme);
+    bool          retirerForme(size_t index);
+    const Couche& getCouche(size_t index = -1) const;
 
     double aire();
     bool   translater(int deltaX, int deltaY);

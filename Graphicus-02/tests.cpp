@@ -13,6 +13,8 @@
 #include "cercle.h"
 #include "rectangle.h"
 #include "tests.h"
+#include "couche.h"
+#include "canevas.h"
 
 
 
@@ -54,7 +56,7 @@ void Tests::tests_unitaires_vecteur()
 
 void Tests::tests_unitaires_couche()
 {
-    std::cout << "\nTests sur couche:\n----------------------" << std::endl; 
+    std::cout << "\n\nTests sur couche:\n----------------------" << std::endl; 
     // Tests sur la classe Couche
     Couche c1;
     c1.SetEtat(Couche::Etat::Active);
@@ -84,6 +86,24 @@ void Tests::tests_unitaires_couche()
 void Tests::tests_unitaires_canevas()
 {
     // Tests sur la classe Canevas
+    std::cout << "\n\nTests sur canevas:\n----------------------" << std::endl;
+    Canevas c1;
+    std::cout << "Canevas de " << c1.nombreCouche() << " couches" << std::endl;
+
+    c1.activerCouche(0);
+    c1.ajouterForme(new Rectangle(1, 1, {2, 3});
+    c1.ajouterForme(new Carre(3));
+    c1.ajouterForme(new Cercle(r, {7, 8});
+
+    c1.cacherCouche(1);
+
+    c1.activerCouche(2);
+    c1.ajouterForme(new Rectangle(3, 4, {5, 6});
+    c1.ajouterForme(new Carre(1, {3, 4});
+    c1.ajouterForme(new Cercle(3));
+
+    c1.ajouterCouche(c1.getCouche(1));
+    c1.
 }
 
 void Tests::tests_unitaires()
