@@ -34,7 +34,8 @@ public:
     vector(size_t count, const ItemType& value);
 
     // Copy constructor
-    vector(const vector& other);
+    template<typename o_ItemType, bool o_shouldDelete>
+    vector(const vector<o_ItemType, o_shouldDelete>& other);
 
     // Destructeur
     ~vector();
@@ -146,8 +147,14 @@ vector<ItemType, shouldDelete>::vector(size_t count, const ItemType& value)
 
 // Copy constructor
 template<typename ItemType, bool shouldDelete>
-vector<ItemType, shouldDelete>::vector(const vector& other)
+template<typename o_ItemType, bool o_shouldDelete>
+vector<ItemType, shouldDelete>::vector(const vector<o_ItemType, o_shouldDelete>& other)
 {
+    // Vérifie le type des éléments de chaque vecteurs
+    static_assert(std::is_convertible<o_ItemType, ItemType>::value,
+                  "Les deux vecteurs devraient etre du meme type, ou le type du vecteur copie "
+                  "devrait pouvoir etre converti en le type du vecteur construit");
+
     m_reallocate(other.capacity());
     resize(other.size());
     Iterator srcI = other.begin();
