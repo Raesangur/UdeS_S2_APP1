@@ -5,22 +5,21 @@
 classe Carre : public Rectangle
 {
 public:
-    Carre();
-    Carre(size_t cote, Coordonnee ancrage);
+    Carre(double cote = 1, Coordonnee ancrage = {0, 0});
     ~Carre();
 
-    void setCote(size_t valCote)
+    void setCote(double valCote)
     {
         cote = valCote;
     }
-    size_t getCote() const
+    double getCote() const
     {
         return cote;
     }
 
-    size_t aire() const override
+    double aire() const override
     {
-        size_t aire = cote * cote;
+        double aire = cote * cote;
     }
 
     void afficher(std::ostream & s) const override
@@ -31,5 +30,5 @@ public:
     }
 
 private:
-    size_t cote;
+    double cote;
 };

@@ -6,30 +6,28 @@ class Rectangle : public Forme
 {
 public:
     // creation rectangle : (L;H;ptAncrage) **Constructeur**
-    // valeurs initiales  : L = 1    H = 1    Ancr = (0;0)
-    Rectangle();
-    Rectangle(size_t L, size_t H, Coordonnee ptAncrage);
+    Rectangle(double L = 1, double H = 1, Coordonnee ptAncrage = {0, 0});
     // Destructeur
     ~Rectangle();
     // Methodes get set
 
-    void setLargeur(size_t l)
+    void setLargeur(double l)
     {
         largeur = l;
     }
-    void setHauteur(size_t h)
+    void setHauteur(double h)
     {
         hauteur = h;
     }
-    size_t getLargeur()
+    double getLargeur()
     {
         return largeur;
     }
-    size_t getHauteur()
+    double getHauteur()
     {
         return hauteur;
     }
-    size_t aire() const override
+    double aire() const override
     {
         return largeur * hauteur;
     }
@@ -43,7 +41,7 @@ public:
     // getAncrage(); et setAncrage(Coordonnee c); **Methodes heritees**
 
 private:
-    size_t largeur;
-    size_t hauteur;
+    double largeur;
+    double hauteur;
     // Coordonnee ancrage; en protected herite de la classe Forme
 };
