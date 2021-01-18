@@ -76,8 +76,6 @@ public:
     void     push_back(const ItemType& value, size_t count = 1);
     void     pop_back(size_t count = 1);
     ItemType remove(size_t index);
-
-    inline void afficher(std::ostream& s) const;
 };
 
 
@@ -322,27 +320,17 @@ ItemType vector<ItemType, shouldDelete>::remove(size_t index)
 }
 
 // Méthode afficher qui n'existe que si le type est un Forme* (spécialisation de template)
-// Le keyword inline sert à indiquer que la définition sera présente dans plusieurs translation
-// units sans briser la one-definition-rule (on aurait du mettre la spécialisation de la template
-// dans un fichier .cpp, mais elle aurait été seule)
+// Overload de l'opérateur de shifting pour pouvoir envoyer le vecteur directement dans un ostream
+// pour l'affichage.
+// Ne fonctionne qu'avec les vecteurs de Forme*
 template<bool shouldDelete>
-inline void vector<Forme*, shouldDelete>::afficher(std::ostream& s) const
+std::ostream& operator<<(std::ostream& s, const vector<Forme*, shouldDelete>& vec)
 {
-    for(Forme* fp : *this)
+    for (Forme* fp : vec)
     {
         fp->afficher(s);
     }
-    // for(Iterator it = begin(); it < end(); it++)
-    // {
-    //     (*it)->afficher(s);
-    // }
-}
-
-template<typename ItemType, bool shouldDelete>
-inline void vector<ItemType, shouldDelete>::afficher(std::ostream& s) const
-{
-    // No nothing
-    (void)s;
+    return s;
 }
 
 #endif

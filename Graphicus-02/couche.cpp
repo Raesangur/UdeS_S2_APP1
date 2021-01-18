@@ -117,7 +117,7 @@ void Couche::afficher(std::ostream& s) const
         }
         else
         {
-            m_formes.afficher(s);
+            s << m_formes;
         }
     }
     else
