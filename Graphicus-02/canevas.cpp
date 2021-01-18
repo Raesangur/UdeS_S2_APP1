@@ -30,7 +30,7 @@ bool Canevas::activerCouche(size_t index)
     {
         return false;
     }
-
+    std::cout << "uh?" << std::endl;
     m_couches[m_index].SetEtat(Couche::Etat::Inactive);
     m_couches[m_index = index].SetEtat(Couche::Etat::Active);
     return true;

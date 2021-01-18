@@ -134,6 +134,9 @@ void Tests::tests_unitaires_canevas()
     c1.ajouterForme(new Rectangle(1, 1, {2, 3}));
     c1.ajouterForme(new Carre(3));
     c1.ajouterForme(new Cercle(6, {7, 8}));
+    std::cout << "Première couche:" << std::endl;
+    c1.getCouche().afficher(std::cout);
+
 
     c1.cacherCouche(1);
 

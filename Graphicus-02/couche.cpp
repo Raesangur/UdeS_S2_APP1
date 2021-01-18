@@ -15,10 +15,12 @@ bool Couche::AjouterForme(Forme* pforme)
         try
         {
             m_formes.push_back(pforme);
+            std::cout << "Ajout d'une forme successful" << std::endl;
             return true;
         }
         catch(std::bad_alloc& ex)
         {
+            std::cout << "erreur lors de l'ajout d'une forme à la couche" << std::endl;
             return false;
         }
     }

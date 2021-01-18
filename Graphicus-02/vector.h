@@ -43,8 +43,6 @@ public:
     // Destructeur
     ~vector();
 
-
-
     // Opérateur d'indexation pour accès
     // Activée si le type est un pointeur (SFINAE)
     template<typename T                                                     = ItemType,
@@ -56,7 +54,10 @@ public:
              typename std::enable_if<!std::is_pointer<T>::value, bool>::type = true>
     const T& operator[](size_t index) const;
 
-    ItemType& operator[](size_t index);
+    template<typename T = ItemType,
+             typename std::enable_if<!std::is_pointer<T>::value, bool>::type = true>
+    T& operator[](size_t index);
+
 
     Iterator begin() const;
     Iterator end() const;
@@ -181,6 +182,7 @@ template<typename ItemType, bool shouldDelete>
 template<typename T, typename std::enable_if<std::is_pointer<T>::value, bool>::type>
 const T vector<ItemType, shouldDelete>::operator[](size_t index) const
 {
+    std::cout << "ptr" << std::endl;
     if(index >= size())
     {
         return nullptr;
@@ -188,11 +190,13 @@ const T vector<ItemType, shouldDelete>::operator[](size_t index) const
     return m_begin[index];
 }
 
+
 // Activée si le type n'est pas un pointeur (SFINAE)
 template<typename ItemType, bool shouldDelete>
 template<typename T, typename std::enable_if<!std::is_pointer<T>::value, bool>::type>
 const T& vector<ItemType, shouldDelete>::operator[](size_t index) const
 {
+    std::cout << "!ptr const" << std::endl;
     if(index >= size())
     {
         throw std::exception();
@@ -201,9 +205,15 @@ const T& vector<ItemType, shouldDelete>::operator[](size_t index) const
 }
 
 template<typename ItemType, bool shouldDelete>
-ItemType& vector<ItemType, shouldDelete>::operator[](size_t index)
+template<typename T, typename std::enable_if<!std::is_pointer<T>::value, bool>::type>
+T& vector<ItemType, shouldDelete>::operator[](size_t index)
 {
-    return operator[](index);
+    std::cout << "!ptr" << std::endl;
+    if(index >= size())
+    {
+        throw std::exception();
+    }
+    return m_begin[index];    return const_cast<T&>(operator[](index));
 }
 
 
