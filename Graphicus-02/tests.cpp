@@ -55,7 +55,7 @@ void Tests::tests_unitaires_vecteur()
 {
     // Tests sur la classe Vecteur
     std::cout<<"\n\tTests unitaires sur les vecteurs\n"<<std::endl;
-    vector<Forme*> v1;
+    vector<Forme*, VEC_DO_NOT_DELETE_ELEMENTS> v1;
     std::cout<<"Test 1:\nCreation d'un vecteur vide\nAjout d'un cercle (r=6)\n"<<std::endl;
     Forme* c1 = new Cercle();
     dynamic_cast<Cercle*>(c1)->setRayon(6);
@@ -144,7 +144,7 @@ void Tests::tests_unitaires_canevas()
     c1.ajouterForme(new Cercle(3));
 
     c1.ajouterCouche(c1.getCouche(1));
-   // c1.
+    c1.
 }
 
 void Tests::tests_unitaires()

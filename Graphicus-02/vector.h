@@ -8,6 +8,9 @@
 #include <type_traits>
 
 
+#define VEC_DO_NOT_DELETE_ELEMENTS false
+#define VEC_DELETE_ELEMENTS true
+
 
 template<typename ItemType, bool shouldDelete = std::is_pointer<ItemType>::value>
 class vector
