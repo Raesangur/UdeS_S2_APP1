@@ -61,7 +61,7 @@ void Tests::tests_unitaires_vecteur()
     dynamic_cast<Cercle*>(c1)->setRayon(6);
     std::cout<<"Affichage:"<<std::endl;
     v1.push_back(c1);
-    v1.afficher(std::cout);
+    std::cout << v1;
 
     std::cout<<"\nTest 2:\nAjout d'autres formes :\nrectangle(L=5, H=4, ancr={3;9}) carre(L=10, ancr={3,9})) cercle(r=4, ancr={0;0})"<<std::endl;
     Forme* rec1 = new Rectangle(5, 4, {3, 9});
@@ -71,28 +71,27 @@ void Tests::tests_unitaires_vecteur()
     v1.push_back(car1);
     v1.push_back(cer2);
     std::cout<<"\nAffichage:"<<std::endl;
-    v1.afficher(std::cout);
+    std::cout << v1;
 
     std::cout<<"\nTest 3:\nRetirer le dernier element du vecteur"<<std::endl;
     v1.pop_back();
     std::cout<<"\nAffichage:"<<std::endl;
-    v1.afficher(std::cout);
+    std::cout << v1;
 
     std::cout<<"\nTest 4:\nRetirer le 2e element du vecteur"<<std::endl;
     v1.remove(1);
     std::cout<<"\nAffichage:"<<std::endl;
-    v1.afficher(std::cout);
+    std::cout << v1;
 
     std::cout<<"\nTest 5:\nConstruire une copie de ce vecteur"<<std::endl;
     vector<Forme*> v2(v1);
-    v2.afficher(std::cout);
+    std::cout << v2;
 
     std::cout<<"\nTest 6:\nVider le vecteur"<<std::endl;
     v1.clear();
     std::cout<<"\nAffichage:\n"<<std::endl;
-    v1.afficher(std::cout);
-    std::cout<<"Le vecteur est vide!"<<std::endl;
-
+    std::cout << v1;
+    std::cout << "Le vecteur est vide!" << std::endl;
 }
 
 void Tests::tests_unitaires_couche()
