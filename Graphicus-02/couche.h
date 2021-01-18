@@ -26,24 +26,6 @@ public:
         Active,
         Inactive,
         Cachee
-
-        operator std::string(Etat e)
-        {
-            switch(e)
-            {
-                case Init:
-                    return "Init";
-                case Active:
-                    return "Active";
-                case Inactive:
-                    return "Inactive";
-                case Cachee:
-                    return "Cachee";
-
-                default:
-                    return "Invalid state";
-            }
-        }
     };
 
 private:

@@ -22,8 +22,11 @@ public:
 
     bool reinitialiser();
 
-    bool activerCouche(size_t index);
-    bool cacherCouche(size_t index);
+    bool   activerCouche(size_t index);
+    bool   cacherCouche(size_t index);
+    bool   ajouterCouche(Couche* couche);
+    bool   enleverCouche(size_t index);
+    size_t nombreCouche() const;
 
     bool ajouterForme(Forme* p_forme);
     bool retirerForme(size_t index);
