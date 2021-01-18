@@ -84,9 +84,9 @@ bool Canevas::translater(int deltaX, int deltaY)
 
 void Canevas::afficher(std::ostream& s)
 {
-   for (const Couche& c : m_couches)
-   {
-       c.afficher(s);
-       s << std::endl;
-   }
+    for(const Couche& c : m_couches)
+    {
+        c.afficher(s);
+        s << std::endl;
+    }
 }

@@ -10,8 +10,8 @@
 
 int main()
 {
-    int ptrr = 2;
-    vector<int> a(3, 0);
+    int          ptrr = 2;
+    vector<int>  a(3, 0);
     vector<int*> b(1, &ptrr);
 
     Tests tests;

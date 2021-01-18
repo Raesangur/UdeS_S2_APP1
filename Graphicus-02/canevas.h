@@ -34,7 +34,7 @@ public:
 
 private:
     vector<Couche> m_couches{5};
-    size_t m_index = 0;
+    size_t         m_index = 0;
 };
 
 #endif
