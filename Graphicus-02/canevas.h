@@ -30,6 +30,7 @@ public:
 
     bool ajouterForme(Forme* p_forme);
     bool retirerForme(size_t index);
+    Couche& getCouche(size_t index = -1) const;
 
     double aire();
     bool   translater(int deltaX, int deltaY);

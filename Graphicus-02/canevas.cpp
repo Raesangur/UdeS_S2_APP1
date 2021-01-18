@@ -77,6 +77,19 @@ size_t Canevas::nombreCouche() const
     return m_couches.size();
 }
 
+Couche& getCouche(size_t index) const
+{
+    // Retourne la couche en cours
+    if(index == (size_t)-1)
+    {
+         return m_couches[m_index];
+    }
+    else
+    {
+        return m_couches[index];
+    }
+}
+
 bool Canevas::ajouterForme(Forme* p_forme)
 {
     return m_couches[m_index].AjouterForme(p_forme);
