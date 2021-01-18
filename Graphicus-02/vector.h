@@ -77,8 +77,8 @@ public:
 };
 
 
-template<typename ItemType>
-void vector<ItemType>::m_reallocate(size_t newCapacity)
+template<typename ItemType, bool shouldDelete>
+void vector<ItemType, shouldDelete>::m_reallocate(size_t newCapacity)
 {
     // Allocation du nouveau bloc de mémoire
     ItemType* newData    = new ItemType[newCapacity];
@@ -98,13 +98,13 @@ void vector<ItemType>::m_reallocate(size_t newCapacity)
     m_capacity = newCapacity;
 }
 
-template<typename ItemType>
+template<typename ItemType, bool shouldDelete>
 void vector<ItemType>::m_reallocate()
 {
     m_reallocate(m_capacity * 2);
 }
 
-template<typename ItemType>
+template<typename ItemType, bool shouldDelete>
 void vector<ItemType>::m_removeElements(Iterator itBegin, Iterator itEnd)
 {
     for (ItemType& item : *this)
@@ -125,7 +125,7 @@ void vector<ItemType>::m_removeElements(Iterator itBegin, Iterator itEnd)
 }
 
 
-template<typename ItemType>
+template<typename ItemType, bool shouldDelete>
 vector<ItemType>::vector(size_t count)
 {
     m_reallocate(count);
@@ -133,7 +133,7 @@ vector<ItemType>::vector(size_t count)
 }
 
 // Vecteur avec sa taille et assigne value a tous ses éléments
-template<typename ItemType>
+template<typename ItemType, bool shouldDelete>
 vector<ItemType>::vector(size_t count, const ItemType& value)
 {
     m_reallocate(count);
@@ -145,7 +145,7 @@ vector<ItemType>::vector(size_t count, const ItemType& value)
 }
 
 // Copy constructor
-template<typename ItemType>
+template<typename ItemType, bool shouldDelete>
 vector<ItemType>::vector(const vector& other)
 {
     m_reallocate(other.capacity());
@@ -158,7 +158,7 @@ vector<ItemType>::vector(const vector& other)
 }
 
 // Destructeur
-template<typename ItemType>
+template<typename ItemType, bool shouldDelete>
 vector<ItemType>::~vector()
 {
     clear();
@@ -169,7 +169,7 @@ vector<ItemType>::~vector()
 
 // Opérateur d'indexation pour accès
 // Activée si le type est un pointeur (SFINAE)
-template<typename ItemType>
+template<typename ItemType, bool shouldDelete>
 template<typename T, typename std::enable_if<std::is_pointer<T>::value, bool>::type>
 const T vector<ItemType>::operator[](size_t index) const
 {
@@ -181,7 +181,7 @@ const T vector<ItemType>::operator[](size_t index) const
 }
 
 // Activée si le type n'est pas un pointeur (SFINAE)
-template<typename ItemType>
+template<typename ItemType, bool shouldDelete>
 template<typename T, typename std::enable_if<!std::is_pointer<T>::value, bool>::type>
 const T& vector<ItemType>::operator[](size_t index) const
 {
@@ -192,44 +192,44 @@ const T& vector<ItemType>::operator[](size_t index) const
     return m_begin[index];
 }
 
-template<typename ItemType>
+template<typename ItemType, bool shouldDelete>
 ItemType& vector<ItemType>::operator[](size_t index)
 {
     return operator[](index);
 }
 
 
-template<typename ItemType>
+template<typename ItemType, bool shouldDelete>
 typename vector<ItemType>::Iterator vector<ItemType>::begin() const
 {
     return m_begin;
 }
 
-template<typename ItemType>
+template<typename ItemType, bool shouldDelete>
 typename vector<ItemType>::Iterator vector<ItemType>::end() const
 {
     return m_end;
 }
 
-template<typename ItemType>
+template<typename ItemType, bool shouldDelete>
 size_t vector<ItemType>::size() const
 {
     return m_end - m_begin;
 }
 
-template<typename ItemType>
+template<typename ItemType, bool shouldDelete>
 size_t vector<ItemType>::capacity() const
 {
     return m_capacity;
 }
 
-template<typename ItemType>
+template<typename ItemType, bool shouldDelete>
 bool vector<ItemType>::empty() const
 {
     return size() == 0;
 }
 
-template<typename ItemType>
+template<typename ItemType, bool shouldDelete>
 void vector<ItemType>::resize(size_t newSize)
 {
     if(newSize < size())
@@ -240,13 +240,13 @@ void vector<ItemType>::resize(size_t newSize)
     m_end = m_begin + newSize;
 }
 
-template<typename ItemType>
+template<typename ItemType, bool shouldDelete>
 void vector<ItemType>::reserve(size_t capacity)
 {
     m_reallocate(capacity);
 }
 
-template<typename ItemType>
+template<typename ItemType, bool shouldDelete>
 void vector<ItemType>::shrink_to_fit()
 {
     m_reallocate(size());
@@ -255,14 +255,14 @@ void vector<ItemType>::shrink_to_fit()
 
 // Appelle le destructeur sur tous les éléments
 // Réinitialise la taille à 0
-template<typename ItemType>
+template<typename ItemType, bool shouldDelete>
 void vector<ItemType>::clear()
 {
     m_removeElements(begin(), end());
     m_end = begin();
 }
 
-template<typename ItemType>
+template<typename ItemType, bool shouldDelete>
 void vector<ItemType>::push_back(const ItemType& value, size_t count)
 {
     if(size() + count > capacity())
@@ -283,7 +283,7 @@ void vector<ItemType>::push_back(const ItemType& value, size_t count)
     }
 }
 
-template<typename ItemType>
+template<typename ItemType, bool shouldDelete>
 void vector<ItemType>::pop_back(size_t count)
 {
     if(count > size())
@@ -293,7 +293,7 @@ void vector<ItemType>::pop_back(size_t count)
     resize(size() - count);
 }
 
-template<typename ItemType>
+template<typename ItemType, bool shouldDelete>
 ItemType vector<ItemType>::remove(size_t index)
 {
     if(index > size())
