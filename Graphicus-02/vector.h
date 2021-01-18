@@ -7,10 +7,13 @@
 #include <iostream>
 #include <type_traits>
 
-vector<Couche>
 
-  template<typename ItemType, bool shouldDelete = is_pointer<ItemType>::value>
-  class vector
+#define VEC_DO_NOT_DELETE_ELEMENTS false
+#define VEC_DELETE_ELEMENTS true
+
+
+template<typename ItemType, bool shouldDelete = std::is_pointer<ItemType>::value>
+class vector
 {
 private:
     using Iterator = ItemType*;
@@ -108,7 +111,7 @@ void vector<ItemType, shouldDelete>::m_reallocate()
 template<typename ItemType, bool shouldDelete>
 void vector<ItemType, shouldDelete>::m_removeElements(Iterator itBegin, Iterator itEnd)
 {
-    for(ItemType& item : *this)
+    for(Iterator it = itBegin; it < itEnd; it++)
     {
         // Normalement, std::destroy devrait être utilisé, ou un allocator comme std::allocator
         // pour pouvoir gérer la destruction des éléments et la déallocation.
@@ -116,11 +119,11 @@ void vector<ItemType, shouldDelete>::m_removeElements(Iterator itBegin, Iterator
         {
             // Ne fonctionne pas si le pointeur pointe vers un tableau
             // Undefined Behavior si le pointeur n'est pas alloué dynamiquement.
-            delete item;
+            delete *it;
         }
         else
         {
-            item.~ItemType();
+            it->~ItemType();
         }
     }
 }
