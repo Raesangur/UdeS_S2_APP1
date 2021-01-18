@@ -338,5 +338,11 @@ inline void vector<Forme*, shouldDelete>::afficher(std::ostream& s) const
     // }
 }
 
+template<typename ItemType, bool shouldDelete>
+inline void vector<ItemType, shouldDelete>::afficher(std::ostream& s) const
+{
+    // No nothing
+    (void)s;
+}
 
 #endif
