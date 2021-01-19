@@ -1,7 +1,9 @@
 // Variables globales:
 // débutPointeur(pointeur) : Pointeur vers le début de l'espace mémoire alloué
-// finPointeur(pointeur) :   Pointeur vers l'élément suivant le dernier élément dans l'espace mémoire alloué
-// capacité(entier) :        Taille totale de l'espace mémoire présentement alloué
+// finPointeur(pointeur) :   Pointeur vers l'élément suivant le dernier élément
+//                           dans l'espace mémoire alloué
+// capacité(entier) :        Taille totale de l'espace mémoire présentement
+//                           alloué
 
 FONCTION AjoutElement(valeur) : succès
 	// valeur(pointeur) : Pointeur vers le nouvel élément à ajouter au vecteur
@@ -23,17 +25,21 @@ DÉBUT
 	Retourner succès
 FIN
 
-// Cette fonction en pseudocode ne s'attaque qu'au scénario où la capacité augmente, mais elle pourrait diminuer.
+// Cette fonction en pseudocode ne s'attaque qu'au scénario où la capacité
+// augmente, mais elle pourrait diminuer.
 FONCTION Réallouer(nouvelleCapacité) : succès
-	// Alloue un nouveau bloc de mémoire, copie les éléments de l'ancien bloc vers le nouveau bloc, et supprime l'ancien bloc
+	// Alloue un nouveau bloc de mémoire, copie les éléments de l'ancien bloc
+	// vers le nouveau bloc, et supprime l'ancien bloc
+
 	// nouvelleCapacité(entier) : Taille du nouveau bloc mémoire
-	// succès(booléen) :          Résultat si le nouveau bloc mémoire a pu être alloué
+	// succès(booléen) :          Résultat si le nouveau bloc mémoire a pu
+	//                            être alloué
 DÉBUT
 	// nouveauBloc(pointeur) : Pointeur vers le nouveau bloc mémoire
 
 	nouveauBloc := Alloue nouvelleCapacité dans la mémoire dynamique
 
-	SI nouveauBloc = 0
+	SI nouveauBloc = 0 ALORS
 		// Il y a eu une erreur dans l'allocation du bloc mémoire
 		succès = faux
 		Retourne succès
