@@ -7,7 +7,6 @@ Rectangle::Rectangle(double L, double H, Coordonnee ptAncrage) : Forme(ptAncrage
 {
     setLargeur(L);
     setHauteur(H);
-    //    setAncrage(ptAncrage);
 }
 Rectangle::Rectangle(const Forme* f) : Forme(f->getAncrage().x, f->getAncrage().y)
 {
