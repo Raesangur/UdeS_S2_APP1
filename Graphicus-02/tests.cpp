@@ -46,9 +46,9 @@ void Tests::tests_unitaires_formes()
     dynamic_cast<Cercle*>(pcer)->setRayon(5);
     pcer->afficher(std::cout);
 
-    //delete pcer;
-    //delete prec;
-    //delete pcar;
+    delete pcer;
+    delete prec;
+    delete pcar;
 }
 
 void Tests::tests_unitaires_vecteur()
@@ -92,6 +92,23 @@ void Tests::tests_unitaires_vecteur()
     std::cout<<"\nAffichage:\n"<<std::endl;
     std::cout << v1;
     std::cout << "Le vecteur est vide!" << std::endl;
+
+    std::cout<<"\nTest 7:\nReserver une taille plus grande et constructeur avec 5 cercles"<<std::endl;
+    vector<Forme*> v3(5, cer2);
+    v3.reserve(10);
+    std::cout << "\nLa nouvelle capacite est de " << v3.capacity() << "!\nAffichage:" << std::endl;
+    std::cout << v3;
+
+    std::cout<<"\nTest 8:\nVoir la capacite si on ajoute une forme au vecteur ayant 5 formes sur une capacite de 10"<<std::endl;
+    v3.push_back(rec1);
+    std::cout<<"\nLa capacite est de "<<v3.capacity()<<"!\nAffichage:"<<std::endl;
+    std::cout<<v3;
+    
+    std::cout<<"\nTest 9:\nUtilisation de la methode pop_back et retour a la bonne capacite"<<std::endl;
+    v3.pop_back();
+    v3.shrink_to_fit();
+    std::cout<<"\nLa capacite est de "<<v3.capacity()<<"!\nAffichage:"<<std::endl;
+    std::cout<<v3;
 }
 
 void Tests::tests_unitaires_couche()
