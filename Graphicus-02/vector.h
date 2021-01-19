@@ -102,7 +102,7 @@ void vector<ItemType, shouldDelete>::m_reallocate(size_t newCapacity)
     }
 
     // Suppression de l'ancien bloc de mémoire
-    operator delete[](m_begin);
+    ::operator delete[](m_begin);
     m_begin    = newData;
     m_end      = m_begin + copiedSize;
     m_capacity = newCapacity;
@@ -212,7 +212,7 @@ template<typename ItemType, bool shouldDelete>
 vector<ItemType, shouldDelete>::~vector()
 {
     clear();
-    operator delete[](m_begin);
+    ::operator delete[](m_begin);
 }
 
 
