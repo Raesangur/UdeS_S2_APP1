@@ -120,7 +120,7 @@ void Tests::tests_unitaires_vecteur()
 
 void Tests::tests_unitaires_couche()
 {
-    std::cout << "\n\nTests sur couche:\n----------------------" << std::endl;
+    std::cout << "\n\n\tTests sur couche:\n----------------------" << std::endl;
     // Tests sur la classe Couche
     Couche c1;
     c1.SetEtat(Couche::Etat::Active);
@@ -150,7 +150,7 @@ void Tests::tests_unitaires_couche()
 void Tests::tests_unitaires_canevas()
 {
     // Tests sur la classe Canevas
-    std::cout << "\n\nTests sur canevas:\n----------------------" << std::endl;
+    std::cout << "\n\n\tTests sur canevas:\n----------------------" << std::endl;
     Canevas c1;
     std::cout << "Canevas de " << c1.nombreCouche() << " couches" << std::endl;
 
@@ -171,11 +171,6 @@ void Tests::tests_unitaires_canevas()
 
     c1.ajouterCouche(c1.getCouche(1));
     std::cout << "Canevas de " << c1.nombreCouche() << " couches" << std::endl;
-
-
-    extern int conteurForme;
-    std::cout << conteurForme << " Formes" << std::endl;
-    // c1.
 }
 
 void Tests::tests_unitaires()
