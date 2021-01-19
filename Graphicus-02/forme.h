@@ -26,7 +26,7 @@ public:
     Coordonnee     getAncrage() const;
     void           setAncrage(Coordonnee c);
     virtual double aire() const                    = 0;
-    virtual void   afficher(std::ostream& s) const = 0;
+    virtual void afficher(std::ostream& s) const = 0;
 
 protected:
     Coordonnee ancrage;

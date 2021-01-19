@@ -31,24 +31,6 @@ double Carre::getCote() const
     return largeur;
 }
 
-void Carre::setLargeur(double l)
-{
-    setCote(l);
-}
-void Carre ::setHauteur(double h)
-{
-    setCote(h);
-}
-
-size_t Carre::getLargeur() const
-{
-    return getCote();
-}
-size_t Carre ::getHauteur() const
-{
-    return getCote();
-}
-
 double Carre::aire() const
 {
     return hauteur * largeur;
