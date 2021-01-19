@@ -14,10 +14,9 @@
 
 // Le vecteur peut ne pas vouloir supprimer (à l'aide de l'opérateur delete) chaque élément,
 // comme dans le cas où il ne contient pas des pointeurs (s'il contient directement des couches),
-// ou dans le cas où le même pointeur est tenue par plusieurs vecteurs et la responsabilité d'ownership
-// est partagée. 
-// Le template paramter shouldDelete permet donc de sélectionner cette suppression (et est activée par défaut
-// si le vecteur comprend des pointeurs).
+// ou dans le cas où le même pointeur est tenue par plusieurs vecteurs et la responsabilité
+// d'ownership est partagée. Le template paramter shouldDelete permet donc de sélectionner cette
+// suppression (et est activée par défaut si le vecteur comprend des pointeurs).
 template<typename ItemType, bool shouldDelete = std::is_pointer<ItemType>::value>
 class vector
 {
@@ -95,7 +94,8 @@ void vector<ItemType, shouldDelete>::m_reallocate(size_t newCapacity)
     // Allocation du nouvea bloc de mémoire
     // L'utilisation de operator new au lieu de simplement new permet d'allouer un bloc de mémoire
     // sans faire appel au constructeur de l'objet.
-    // Construire les objets ne serait pas pertinent vu qu'ils se font overwriter immédiatement après par des copies.
+    // Construire les objets ne serait pas pertinent vu qu'ils se font overwriter immédiatement
+    // après par des copies.
     ItemType* newData    = static_cast<ItemType*>(operator new[](sizeof(ItemType) * newCapacity));
     size_t    copiedSize = std::min(newCapacity, size());
     resize(copiedSize);
@@ -148,7 +148,7 @@ void vector<ItemType, shouldDelete>::m_removeElements(Iterator itBegin, Iterator
         else
         {
             // Si l'espace mémoire se fait désallouer par `delete[]` les destructeurs se font
-            // automatiquement appeller! 
+            // automatiquement appeller!
             // it->~ItemType();
         }
     }

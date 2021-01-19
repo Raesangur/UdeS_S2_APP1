@@ -23,7 +23,7 @@ public:
 
     // Methodes virtuelles
     double aire() const override;
-    void           afficher(std::ostream& s) const override;
+    void   afficher(std::ostream& s) const override;
     // getAncrage(); et setAncrage(Coordonnee c); **Methodes heritees**
 
 protected:

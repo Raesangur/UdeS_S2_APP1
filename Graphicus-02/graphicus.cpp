@@ -15,6 +15,6 @@ int main()
 
     Tests tests;
 
-    tests.tests_application_cas_02();
+    tests.tests_application();
     return 0;
 }

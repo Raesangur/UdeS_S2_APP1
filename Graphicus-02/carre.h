@@ -21,8 +21,8 @@ public:
 
 private:
     // Modification de la déclaration d'accessibilité des méthodes héritées de rectangle
-    using Rectangle::setLargeur;
-    using Rectangle::setHauteur;
-    using Rectangle::getLargeur;
     using Rectangle::getHauteur;
+    using Rectangle::getLargeur;
+    using Rectangle::setHauteur;
+    using Rectangle::setLargeur;
 };
