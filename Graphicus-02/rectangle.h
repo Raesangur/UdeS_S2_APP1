@@ -22,7 +22,7 @@ public:
     double getHauteur() const;
 
     // Methodes virtuelles
-    virtual double aire() const override;
+    double aire() const override;
     void           afficher(std::ostream& s) const override;
     // getAncrage(); et setAncrage(Coordonnee c); **Methodes heritees**
 

@@ -11,8 +11,6 @@
 #ifndef COUCHE_H
 #define COUCHE_H
 
-#include <string>
-
 #include "cercle.h"
 #include "forme.h"
 #include "vector.h"

@@ -12,6 +12,12 @@
 #define VEC_DELETE_ELEMENTS        true
 
 
+// Le vecteur peut ne pas vouloir supprimer (à l'aide de l'opérateur delete) chaque élément,
+// comme dans le cas où il ne contient pas des pointeurs (s'il contient directement des couches),
+// ou dans le cas où le même pointeur est tenue par plusieurs vecteurs et la responsabilité d'ownership
+// est partagée. 
+// Le template paramter shouldDelete permet donc de sélectionner cette suppression (et est activée par défaut
+// si le vecteur comprend des pointeurs).
 template<typename ItemType, bool shouldDelete = std::is_pointer<ItemType>::value>
 class vector
 {
