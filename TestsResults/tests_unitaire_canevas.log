@@ -1,0 +1,14 @@
+
+
+Début de graphicus-02:
+
+
+
+	Tests sur canevas:
+----------------------
+Canevas de 5 couches
+Première couche:
+Rectangle(x=2, y=3 ,l=1, h=1, aire=1)
+Carre(x=0, y=0 ,c=3, aire=9)
+Cercle(x=7, y=8 ,r=6, aire=113.097)
+Canevas de 6 couches

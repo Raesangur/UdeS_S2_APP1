@@ -15,8 +15,6 @@ int main()
 
     Tests tests;
 
-    // tests.tests_unitaires();
-
-    tests.tests_application();
+    tests.tests_application_cas_02();
     return 0;
 }

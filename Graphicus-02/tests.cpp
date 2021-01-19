@@ -294,15 +294,14 @@ void Tests::tests_application_cas_01()
 void Tests::tests_application_cas_02()
 {
     std::cout << "TESTS APPLICATION (CAS 02)" << std::endl;
-    // Tests sur la classe Canevas
-    std::cout << "\n\n\tTests sur canevas:\n----------------------" << std::endl;
+
     Canevas c1;
     std::cout << "Canevas de " << c1.nombreCouche() << " couches" << std::endl;
 
     c1.activerCouche(0);
-    c1.ajouterForme(new Rectangle(1, 1, {2, 3}));
-    c1.ajouterForme(new Carre(3));
-    c1.ajouterForme(new Cercle(6, {7, 8}));
+    c1.ajouterForme(new Rectangle(1, 2.5, {2, 3}));
+    c1.ajouterForme(new Carre(9));
+    c1.ajouterForme(new Cercle(3.1415, {7, -6}));
     std::cout << "Première couche:" << std::endl;
     c1.getCouche().afficher(std::cout);
 
@@ -310,9 +309,9 @@ void Tests::tests_application_cas_02()
     c1.cacherCouche(1);
 
     c1.activerCouche(2);
-    c1.ajouterForme(new Rectangle(3, 4, {5, 6}));
-    c1.ajouterForme(new Carre(1, {3, 4}));
-    c1.ajouterForme(new Cercle(3));
+    c1.ajouterForme(new Rectangle(3.1415, 4, {5, 7}));
+    c1.ajouterForme(new Carre(9.4, {-3, 2}));
+    c1.ajouterForme(new Cercle(65535));
 
     c1.ajouterCouche(c1.getCouche(1));
     std::cout << "Canevas de " << c1.nombreCouche() << " couches" << std::endl;

@@ -1,0 +1,11 @@
+
+
+Début de graphicus-02:
+
+TESTS APPLICATION (CAS 02)
+Canevas de 5 couches
+Première couche:
+Rectangle(x=2, y=3 ,l=1, h=2.5, aire=2.5)
+Carre(x=0, y=0 ,c=9, aire=81)
+Cercle(x=7, y=-6 ,r=3.1415, aire=31.0044)
+Canevas de 6 couches

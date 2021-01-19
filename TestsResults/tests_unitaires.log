@@ -1,0 +1,134 @@
+
+
+Début de graphicus-02:
+
+	Tests unitaires sur les formes
+
+Affichage des formes instanciees:
+----
+Carre(x=0, y=4 ,c=3, aire=9)
+Rectangle(x=1, y=1 ,l=3, h=9, aire=27)
+Cercle(x=0, y=0 ,r=3, aire=28.2743)
+----
+Cercle(x=0, y=0 ,r=3, aire=28.2743)
+Rectangle(x=1, y=1 ,l=3, h=9, aire=27)
+Carre(x=0, y=4 ,c=3, aire=9)
+----
+Cercle(x=0, y=0 ,r=5, aire=78.5398)
+
+	Tests unitaires sur les vecteurs
+
+Test 1:
+Creation d'un vecteur vide
+Ajout d'un cercle (r=6)
+
+Affichage:
+Cercle(x=0, y=0 ,r=6, aire=113.097)
+
+Test 2:
+Ajout d'autres formes :
+rectangle(L=5, H=4, ancr={3;9}) carre(L=10, ancr={3,9})) cercle(r=4, ancr={0;0})
+
+Affichage:
+Cercle(x=0, y=0 ,r=6, aire=113.097)
+Rectangle(x=3, y=9 ,l=5, h=4, aire=20)
+Carre(x=2, y=19 ,c=10, aire=100)
+Cercle(x=0, y=0 ,r=4, aire=50.2655)
+
+Test 3:
+Retirer le dernier element du vecteur
+
+Affichage:
+Cercle(x=0, y=0 ,r=6, aire=113.097)
+Rectangle(x=3, y=9 ,l=5, h=4, aire=20)
+Carre(x=2, y=19 ,c=10, aire=100)
+
+Test 4:
+Retirer le 2e element du vecteur
+
+Affichage:
+Cercle(x=0, y=0 ,r=6, aire=113.097)
+Carre(x=2, y=19 ,c=10, aire=100)
+
+Test 5:
+Construire une copie de ce vecteur
+Cercle(x=0, y=0 ,r=6, aire=113.097)
+Carre(x=2, y=19 ,c=10, aire=100)
+
+Test 6:
+Vider le vecteur
+
+Affichage:
+
+Le vecteur est vide!
+
+Test 7:
+Reserver une taille plus grande et constructeur avec 5 cercles
+
+La nouvelle capacite est de 10!
+Affichage:
+Cercle(x=0, y=0 ,r=4, aire=50.2655)
+Cercle(x=0, y=0 ,r=4, aire=50.2655)
+Cercle(x=0, y=0 ,r=4, aire=50.2655)
+Cercle(x=0, y=0 ,r=4, aire=50.2655)
+Cercle(x=0, y=0 ,r=4, aire=50.2655)
+
+Test 8:
+Voir la capacite si on ajoute une forme au vecteur ayant 5 formes sur une capacite de 10
+
+La capacite est de 10!
+Affichage:
+Cercle(x=0, y=0 ,r=4, aire=50.2655)
+Cercle(x=0, y=0 ,r=4, aire=50.2655)
+Cercle(x=0, y=0 ,r=4, aire=50.2655)
+Cercle(x=0, y=0 ,r=4, aire=50.2655)
+Cercle(x=0, y=0 ,r=4, aire=50.2655)
+Rectangle(x=3, y=9 ,l=5, h=4, aire=20)
+
+Test 9:
+Utilisation de la methode pop_back et retour a la bonne capacite
+
+La capacite est de 5	La taille est de5!
+Affichage:
+Cercle(x=0, y=0 ,r=4, aire=50.2655)
+Cercle(x=0, y=0 ,r=4, aire=50.2655)
+Cercle(x=0, y=0 ,r=4, aire=50.2655)
+Cercle(x=0, y=0 ,r=4, aire=50.2655)
+Cercle(x=0, y=0 ,r=4, aire=50.2655)
+Pointeur déjà supprimé!
+Pointeur déjà supprimé!
+Pointeur déjà supprimé!
+Pointeur déjà supprimé!
+
+
+	Tests sur couche:
+----------------------
+Aire: 188.832, pour 5 elements
+Cercle(x=0, y=1 ,r=4, aire=50.2655)
+Rectangle(x=0, y=0 ,l=1, h=1, aire=1)
+Carre(x=0, y=0 ,c=5, aire=25)
+Rectangle(x=0, y=0 ,l=10, h=10, aire=100)
+Cercle(x=0, y=1 ,r=2, aire=12.5664)
+
+Translation de 5x - 2y:
+Cercle(x=5, y=-1 ,r=4, aire=50.2655)
+Rectangle(x=5, y=-2 ,l=1, h=1, aire=1)
+Carre(x=5, y=-2 ,c=5, aire=25)
+Rectangle(x=5, y=-2 ,l=10, h=10, aire=100)
+Cercle(x=5, y=-1 ,r=2, aire=12.5664)
+
+Cacher la couche:
+Couche cachee
+
+Reset de la couche:
+Couche initialisee
+
+
+	Tests sur canevas:
+----------------------
+Canevas de 5 couches
+Première couche:
+Rectangle(x=2, y=3 ,l=1, h=1, aire=1)
+Carre(x=0, y=0 ,c=3, aire=9)
+Cercle(x=7, y=8 ,r=6, aire=113.097)
+Canevas de 6 couches

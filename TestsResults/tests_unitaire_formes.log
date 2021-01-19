@@ -1,0 +1,17 @@
+
+
+Début de graphicus-02:
+
+	Tests unitaires sur les formes
+
+Affichage des formes instanciees:
+----
+Carre(x=0, y=4 ,c=3, aire=9)
+Rectangle(x=1, y=1 ,l=3, h=9, aire=27)
+Cercle(x=0, y=0 ,r=3, aire=28.2743)
+----
+Cercle(x=0, y=0 ,r=3, aire=28.2743)
+Rectangle(x=1, y=1 ,l=3, h=9, aire=27)
+Carre(x=0, y=4 ,c=3, aire=9)
+----
+Cercle(x=0, y=0 ,r=5, aire=78.5398)

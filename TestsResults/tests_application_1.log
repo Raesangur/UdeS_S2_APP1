@@ -1,0 +1,138 @@
+
+
+Début de graphicus-02:
+
+
+TESTS APPLICATION (CAS 01)
+
+-------------------------
+1. Activer la couche 1.
+Résultat: Succès
+
+-------------------------
+2. Ajouter trois formes géométriques (un rectangle, un carré et un cercle) avec des points d’ancrages différents.
+Ajout du rectangle (l = 4, h = 3.14, Coords: {10, 8}):
+Résultat: Succès
+Ajout du carré (c = 5, Coords: {-5, 4}):
+Résultat: Succès
+Ajout du cercle (r = 0.7978845, Coords: {12, 3}):	 // 0.7978845 = √(2/π)
+Résultat: Succès
+Aire du cercle: 2
+
+-------------------------
+3. Activer la couche 2.
+Résultat: Succès
+-------------------------
+4. Ajouter une forme géométriques.
+Copie du rectangle de la couche 1:
+Résultat: Succès
+-------------------------
+5. Afficher le canevas
+----- Couche 0
+Couche vide
+----- Couche 1
+Rectangle(x=10, y=8 ,l=4, h=3.14, aire=12.56)
+Carre(x=-5, y=4 ,c=5, aire=25)
+Cercle(x=12, y=3 ,r=0.797884, aire=2)
+----- Couche 2
+Rectangle(x=10, y=8 ,l=4, h=3.14, aire=12.56)
+----- Couche 3
+Couche initialisee
+----- Couche 4
+Couche initialisee
+
+-------------------------
+6. Afficher l'aire du canevas.
+Aire: 52.12
+
+-------------------------
+7. Activer la couche 0.
+Résultat: Succès
+
+-------------------------
+8. Ajouter trois formes géométriques différentes.
+Ajout d'un cercle (r = 2, Coords: {10, 8}):
+Résultat: Succès
+Ajout d'un rectangle (l = 40, h = 0.01, Coords: {0, 1}):
+Résultat: Succès
+Ajout d'un autre rectangle (l = 4, h = 3, Coords: {100, -5}):
+Résultat: Succès
+
+-------------------------
+9. Cacher la couche 2.
+Résultat: Succès
+
+-------------------------
+10. Activer la couche 1.
+Résultat: Succès
+
+-------------------------
+11. Translater la couche (12x + 4y).
+Résultat: Succès
+
+-------------------------
+12. Afficher le canevas
+----- Couche 0
+Cercle(x=10, y=8 ,r=2, aire=12.5664)
+Rectangle(x=0, y=1 ,l=40, h=0.01, aire=0.4)
+Rectangle(x=100, y=-5 ,l=4, h=3, aire=12)
+----- Couche 1
+Rectangle(x=22, y=12 ,l=4, h=3.14, aire=12.56)
+Carre(x=7, y=8 ,c=5, aire=25)
+Cercle(x=24, y=7 ,r=0.797884, aire=2)
+----- Couche 2
+Couche cachee
+----- Couche 3
+Couche initialisee
+----- Couche 4
+Couche initialisee
+
+-------------------------
+13. Afficher l'aire du canevas.
+Aire: 64.5264
+
+-------------------------
+14. Retirer la première forme de la couche.
+Résultat: Succès
+
+-------------------------
+15. Afficher le canevas
+----- Couche 0
+Cercle(x=10, y=8 ,r=2, aire=12.5664)
+Rectangle(x=0, y=1 ,l=40, h=0.01, aire=0.4)
+Rectangle(x=100, y=-5 ,l=4, h=3, aire=12)
+----- Couche 1
+Carre(x=7, y=8 ,c=5, aire=25)
+Cercle(x=24, y=7 ,r=0.797884, aire=2)
+----- Couche 2
+Couche cachee
+----- Couche 3
+Couche initialisee
+----- Couche 4
+Couche initialisee
+
+-------------------------
+16. Afficher l'aire du canevas.
+Aire: 51.9664
+
+-------------------------
+17. Réinitialiser le canevas.
+Résultat: Succès
+
+-------------------------
+18. Afficher le canevas
+----- Couche 0
+Couche initialisee
+----- Couche 1
+Couche initialisee
+----- Couche 2
+Couche initialisee
+----- Couche 3
+Couche initialisee
+----- Couche 4
+Couche initialisee
+
+-------------------------
+19. Afficher l'aire du canevas.
+Aire: 0
+Fin du test d'application pour la validation!
