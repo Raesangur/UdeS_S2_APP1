@@ -16,6 +16,10 @@
 #include "couche.h"
 #include "canevas.h"
 
+static const char* PrintResult(bool val)
+{
+    return b_val ? "Succès" : "Échec";
+}
 
 
 void Tests::tests_unitaires_formes()
@@ -166,6 +170,19 @@ void Tests::tests_application_cas_01()
 {
     std::cout << "TESTS APPLICATION (CAS 01)" << std::endl;
     // Il faut ajouter les operations realisant ce scenario de test.
+    Canevas c;
+
+    std::cout << "\n1. Activer la couche 1." << std::endl;
+    bool resultat = c.activerCouche(1);
+    std::cout << "Résultat: " << PrintResult(resultat);
+
+    std::cout << "\n2. Ajouter trois formes géométriques (un rectangle, un carré et un cercle) avec des points d’ancrages différents." << std::endl;
+    std::cout << "Ajout du rectangle (l = 4, h = 3, Coords: {10, 8}:\n";
+    c.ajouterForme(new Rectangle(1, 3, {10, 8}));
+    std::cout << "Ajout du carré (c = 5, Coords: {-5, 4}:\n";
+    c.ajouterForme(new Carre(5, {-5, 4}));
+    std::cout << "Ajout du cercle (r = , Coords: {-5, 4}:\n";
+
 }
 
 void Tests::tests_application_cas_02()

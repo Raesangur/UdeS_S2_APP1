@@ -54,9 +54,11 @@ public:
     // Activée si le type n'est pas un pointeur (SFINAE)
     template<typename T                                                      = ItemType,
              typename std::enable_if<!std::is_pointer<T>::value, bool>::type = true>
-    const T& operator[](size_t index) const;
-
     ItemType& operator[](size_t index);
+    template<typename T                                                      = ItemType,
+             typename std::enable_if<!std::is_pointer<T>::value, bool>::type = true>
+    const T& operator[](size_t index) const;
+     
 
     Iterator begin() const;
     Iterator end() const;
@@ -179,7 +181,7 @@ vector<ItemType, shouldDelete>::~vector()
 // Activée si le type est un pointeur (SFINAE)
 template<typename ItemType, bool shouldDelete>
 template<typename T, typename std::enable_if<std::is_pointer<T>::value, bool>::type>
-const T vector<ItemType, shouldDelete>::operator[](size_t index) const
+T vector<ItemType, shouldDelete>::operator[](size_t index) const
 {
     if(index >= size())
     {
@@ -201,9 +203,10 @@ const T& vector<ItemType, shouldDelete>::operator[](size_t index) const
 }
 
 template<typename ItemType, bool shouldDelete>
-ItemType& vector<ItemType, shouldDelete>::operator[](size_t index)
+template<typename T, typename std::enable_if<!std::is_pointer<T>::value, bool>::type>
+T& vector<ItemType, shouldDelete>::operator[](size_t index)
 {
-    return operator[](index);
+    return const_cast<T&>(operator[](index));
 }
 
 
