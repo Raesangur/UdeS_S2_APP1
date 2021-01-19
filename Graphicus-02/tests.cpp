@@ -151,6 +151,9 @@ void Tests::tests_unitaires_canevas()
     c1.ajouterForme(new Rectangle(1, 1, {2, 3}));
     c1.ajouterForme(new Carre(3));
     c1.ajouterForme(new Cercle(6, {7, 8}));
+    std::cout << "Première couche:" << std::endl;
+    c1.getCouche().afficher(std::cout);
+
 
     c1.cacherCouche(1);
 
@@ -160,6 +163,11 @@ void Tests::tests_unitaires_canevas()
     c1.ajouterForme(new Cercle(3));
 
     c1.ajouterCouche(c1.getCouche(1));
+    std::cout << "Canevas de " << c1.nombreCouche() << " couches" << std::endl;
+
+
+    extern int conteurForme;
+    std::cout << conteurForme << " Formes" << std::endl;
     //c1.
 }
 

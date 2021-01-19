@@ -8,6 +8,16 @@
 
 #include "couche.h"
 
+
+// Copy assignment operator
+Couche& Couche::operator=(const Couche& other)
+{
+   m_etat = other.m_etat;
+   m_formes = other.m_formes;
+
+   return *this;
+}
+
 bool Couche::AjouterForme(Forme* pforme)
 {
     if(m_etat == Etat::Active)
@@ -19,6 +29,7 @@ bool Couche::AjouterForme(Forme* pforme)
         }
         catch(std::bad_alloc& ex)
         {
+            std::cout << "erreur lors de l'ajout d'une forme à la couche" << std::endl;
             return false;
         }
     }

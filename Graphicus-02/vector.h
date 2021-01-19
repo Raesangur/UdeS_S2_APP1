@@ -39,11 +39,12 @@ public:
     // Copy constructor
     template<typename o_ItemType, bool o_shouldDelete>
     vector(const vector<o_ItemType, o_shouldDelete>& other);
+    template<typename o_ItemType, bool o_shouldDelete>
+    vector& operator=(const vector<o_ItemType, o_shouldDelete>& other);
+
 
     // Destructeur
     ~vector();
-
-
 
     // Opérateur d'indexation pour accès
     // Activée si le type est un pointeur (SFINAE)
@@ -56,7 +57,10 @@ public:
              typename std::enable_if<!std::is_pointer<T>::value, bool>::type = true>
     const T& operator[](size_t index) const;
 
-    ItemType& operator[](size_t index);
+    template<typename T = ItemType,
+             typename std::enable_if<!std::is_pointer<T>::value, bool>::type = true>
+    T& operator[](size_t index);
+
 
     Iterator begin() const;
     Iterator end() const;
@@ -82,8 +86,10 @@ public:
 template<typename ItemType, bool shouldDelete>
 void vector<ItemType, shouldDelete>::m_reallocate(size_t newCapacity)
 {
-    // Allocation du nouveau bloc de mémoire
-    ItemType* newData    = new ItemType[newCapacity];
+    // Allocation du nouvea bloc de mémoire
+    // L'utilisation de operator new au lieu de simplement new permet d'allouer un bloc de mémoire sans faire appel au constructeur de l'objet
+    // Construire les objets ne serait pas pertinent vu qu'ils se font overriter immédiatement après.
+    ItemType* newData    = static_cast<ItemType*>(operator new[](sizeof(ItemType) * newCapacity));
     size_t    copiedSize = std::min(newCapacity, size());
     resize(copiedSize);
 
@@ -91,10 +97,11 @@ void vector<ItemType, shouldDelete>::m_reallocate(size_t newCapacity)
     for(size_t i = 0; i < copiedSize; i++)
     {
         newData[i] = m_begin[i];
+        //m_begin[i].~ItemType();
     }
 
     // Suppression de l'ancien bloc de mémoire
-    delete[] m_begin;
+    operator delete[](m_begin);
     m_begin    = newData;
     m_end      = m_begin + copiedSize;
     m_capacity = newCapacity;
@@ -113,6 +120,7 @@ void vector<ItemType, shouldDelete>::m_removeElements(Iterator itBegin, Iterator
     {
         // Normalement, std::destroy devrait être utilisé, ou un allocator comme std::allocator
         // pour pouvoir gérer la destruction des éléments et la déallocation.
+        // Le shouldDelete permet du multiple ownership de la même donnée pour sélectionner qui supprime.
         if constexpr(shouldDelete == true && std::is_pointer<ItemType>::value)
         {
             // Ne fonctionne pas si le pointeur pointe vers un tableau
@@ -120,8 +128,8 @@ void vector<ItemType, shouldDelete>::m_removeElements(Iterator itBegin, Iterator
             delete *it;
         }
         else
-        {
-            it->~ItemType();
+	{
+           // it->~ItemType();
         }
     }
 }
@@ -165,12 +173,33 @@ vector<ItemType, shouldDelete>::vector(const vector<o_ItemType, o_shouldDelete>&
     }
 }
 
+template<typename ItemType, bool shouldDelete>
+template<typename o_ItemType, bool o_shouldDelete>
+vector<ItemType, shouldDelete>& vector<ItemType, shouldDelete>::operator=(const vector<o_ItemType, o_shouldDelete>& other)
+{
+    // Vérifie le type des éléments de chaque vecteurs
+    static_assert(std::is_convertible<o_ItemType, ItemType>::value,
+                  "Les deux vecteurs devraient etre du meme type, ou le type du vecteur copie "
+                  "devrait pouvoir etre converti en le type du vecteur construit");
+
+    clear();
+    m_reallocate(other.capacity());
+    resize(other.size());
+    Iterator srcI = other.begin();
+    for(Iterator destI = m_begin; destI < m_end; destI++, srcI++)
+    {
+        *destI = *srcI;
+    }
+
+    return *this;
+}
+
 // Destructeur
 template<typename ItemType, bool shouldDelete>
 vector<ItemType, shouldDelete>::~vector()
 {
     clear();
-    delete[] m_begin;
+    operator delete[](m_begin);
 }
 
 
@@ -188,6 +217,7 @@ const T vector<ItemType, shouldDelete>::operator[](size_t index) const
     return m_begin[index];
 }
 
+
 // Activée si le type n'est pas un pointeur (SFINAE)
 template<typename ItemType, bool shouldDelete>
 template<typename T, typename std::enable_if<!std::is_pointer<T>::value, bool>::type>
@@ -201,9 +231,14 @@ const T& vector<ItemType, shouldDelete>::operator[](size_t index) const
 }
 
 template<typename ItemType, bool shouldDelete>
-ItemType& vector<ItemType, shouldDelete>::operator[](size_t index)
+template<typename T, typename std::enable_if<!std::is_pointer<T>::value, bool>::type>
+T& vector<ItemType, shouldDelete>::operator[](size_t index)
 {
-    return operator[](index);
+    if(index >= size())
+    {
+        throw std::exception();
+    }
+    return m_begin[index];
 }
 
 
@@ -275,6 +310,7 @@ void vector<ItemType, shouldDelete>::push_back(const ItemType& value, size_t cou
 {
     if(size() + count > capacity())
     {
+        std::cout << "Besoin de réallouer vecteur de "<< typeid(ItemType).name() << "\tCapacity= " << capacity() << "\t Taille= " << size() << std::endl; 
         if(size() + count > capacity() * 2)
         {
             m_reallocate(size() + count);

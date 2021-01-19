@@ -34,7 +34,10 @@ private:
 
 public:
     Couche()  = default;
+    Couche(const Couche&) = default;
+    Couche& operator=(const Couche&);
     ~Couche() = default;
+
 
     bool   AjouterForme(Forme* pforme);
     Forme* RetirerForme(size_t index);

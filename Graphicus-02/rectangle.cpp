@@ -3,11 +3,11 @@
 #include "forme.h"
 #include <cstddef>
 
-Rectangle::Rectangle(double L, double H, Coordonnee ptAncrage)
+Rectangle::Rectangle(double L, double H, Coordonnee ptAncrage) : Forme(ptAncrage.x, ptAncrage.y)
 {
     setLargeur(L);
     setHauteur(H);
-    setAncrage(ptAncrage);
+//    setAncrage(ptAncrage);
 }
 
 void Rectangle::setLargeur(double l)
