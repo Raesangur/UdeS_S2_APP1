@@ -11,12 +11,11 @@
 
 int main()
 {
-    std::cout << "\nDébut de graphicus-02:\n" << std::endl;    // (oui deux retours de ligne)
+    std::cout << "\n\nDébut de graphicus-02:\n" << std::endl;    // (oui deux retours de ligne)
 
     Tests tests;
 
-
-    tests.tests_unitaires();
+    // tests.tests_unitaires();
 
     tests.tests_application();
     return 0;

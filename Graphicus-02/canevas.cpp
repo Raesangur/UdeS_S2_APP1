@@ -11,12 +11,16 @@
 
 Canevas::Canevas()
 {
+    for(Couche& c : m_couches)
+    {
+        c = Couche();    // Assigne un objet bien réinitialisé
+    }
+
     m_couches[0].SetEtat(Couche::Etat::Active);
 }
 
 Canevas::~Canevas()
 {
-    std::cout << m_couches.size() << std::endl;
 }
 
 bool Canevas::reinitialiser()
@@ -24,7 +28,6 @@ bool Canevas::reinitialiser()
     m_index = 0;
     m_couches.clear();
     bool status = m_couches.push_back(Couche(), DEFAULT_COUCHES_NBR);
-    m_couches[0].SetEtat(Couche::Etat::Active);
     return status;
 }
 
@@ -122,7 +125,7 @@ bool Canevas::retirerForme(size_t index)
 
 double Canevas::aire()
 {
-    double aireTotale;
+    double aireTotale = 0.0;
     for(const Couche& c : m_couches)
     {
         // On skip les couches cachées (dans la méthode Aire de la couche en tant que telle)

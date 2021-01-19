@@ -9,6 +9,20 @@ Rectangle::Rectangle(double L, double H, Coordonnee ptAncrage) : Forme(ptAncrage
     setHauteur(H);
     //    setAncrage(ptAncrage);
 }
+Rectangle::Rectangle(const Forme* f) : Forme(f->getAncrage().x, f->getAncrage().y)
+{
+    try
+    {
+        const Rectangle& r = *dynamic_cast<const Rectangle*>(f);
+        setLargeur(r.getLargeur());
+        setHauteur(r.getHauteur());
+    }
+    catch(const std::bad_cast& ex)
+    {
+        setLargeur(1);
+        setHauteur(1);
+    }
+}
 
 void Rectangle::setLargeur(double l)
 {

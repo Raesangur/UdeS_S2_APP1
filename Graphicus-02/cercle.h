@@ -14,9 +14,8 @@
 class Cercle : public Forme
 {
 public:
-    Cercle(double ray = 1, Coordonnee a = {0, 0}) : Forme{a.x, a.y}, m_rayon{ray}
-    {
-    }
+    Cercle(double ray = 1, Coordonnee a = {0, 0});
+    Cercle(const Forme* f);
     ~Cercle() = default;
 
     double getRayon() const;

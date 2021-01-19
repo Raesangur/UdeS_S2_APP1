@@ -7,6 +7,19 @@
 Carre::Carre(double c, Coordonnee ptAncrage) : Rectangle(c, c, ptAncrage)
 {
 }
+Carre::Carre(const Forme* f)
+{
+    try
+    {
+        const Carre& c = *dynamic_cast<const Carre*>(f);
+        setCote(c.getCote());
+        setAncrage(c.getAncrage());
+    }
+    catch(const std::bad_cast& ex)
+    {
+        setCote(1);
+    }
+}
 
 void Carre::setCote(double valCote)
 {

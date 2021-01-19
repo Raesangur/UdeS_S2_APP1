@@ -52,6 +52,7 @@ Forme* Couche::RetirerForme(size_t index)
 }
 Forme* Couche::GetForme(size_t index) const
 {
+    // Le vecteur retourne nullptr pour un index invalide; pas besoin de vérifier ici
     return m_formes[index];
 }
 
