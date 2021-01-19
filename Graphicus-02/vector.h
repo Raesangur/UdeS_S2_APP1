@@ -104,7 +104,6 @@ void vector<ItemType, shouldDelete>::m_reallocate(size_t newCapacity)
     for(size_t i = 0; i < copiedSize; i++)
     {
         newData[i] = m_begin[i];
-        // m_begin[i].~ItemType();
     }
 
     // Suppression de l'ancien bloc de mémoire
@@ -137,7 +136,6 @@ void vector<ItemType, shouldDelete>::m_removeElements(Iterator itBegin, Iterator
             if(foundElement != it)
             {
                 // Le pointeur actuel a déjà été supprimé
-                std::cout << "Pointeur déjà supprimé!" << std::endl;
                 continue;
             }
 
