@@ -9,7 +9,7 @@ class Rectangle : public Forme
 public:
     // Creation rectangle : (L; H; ptAncrage) **Constructeur**
     Rectangle(double L = 1, double H = 1, Coordonnee ptAncrage = {0, 0});
-    
+
     // Destructeur
     ~Rectangle() = default;
 
@@ -25,7 +25,7 @@ public:
     void afficher(std::ostream& s) const override;
     // getAncrage(); et setAncrage(Coordonnee c); **Methodes heritees**
 
-private:
+protected:
     double largeur;
     double hauteur;
     // Coordonnee ancrage; en protected herite de la classe Forme

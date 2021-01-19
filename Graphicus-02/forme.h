@@ -16,6 +16,7 @@
 class Forme
 {
 public:
+    Forme();
     Forme(int x = 0, int y = 0);
     virtual ~Forme();
     void           translater(int deltaX, int deltaY);

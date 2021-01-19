@@ -15,6 +15,7 @@ Canevas::Canevas()
 
 Canevas::~Canevas()
 {
+   std::cout << m_couches.size() << std::endl;
 }
 
 bool Canevas::reinitialiser()
@@ -30,7 +31,6 @@ bool Canevas::activerCouche(size_t index)
     {
         return false;
     }
-    std::cout << "uh?" << std::endl;
     m_couches[m_index].SetEtat(Couche::Etat::Inactive);
     m_couches[m_index = index].SetEtat(Couche::Etat::Active);
     return true;
@@ -50,12 +50,13 @@ bool Canevas::ajouterCouche(const Couche& couche)
 {
     try
     {
-        m_couches.push_back(Couche(couche));
+        m_couches.push_back(couche);
         return true;
     }
     catch(const std::bad_alloc& ex)    // Operator new throw une std::bad_alloc en cas d'échec (ne
                                        // retourne pas nullptr);
     {
+        std::cout << "Erreur d'allocation en rajoutant une nouvelle couche" << std::endl;
         return false;
     }
 }

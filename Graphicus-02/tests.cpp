@@ -46,9 +46,9 @@ void Tests::tests_unitaires_formes()
     dynamic_cast<Cercle*>(pcer)->setRayon(5);
     pcer->afficher(std::cout);
 
-    //delete pcer;
-    //delete prec;
-    //delete pcar;
+    delete pcer;
+    delete prec;
+    delete pcar;
 }
 
 void Tests::tests_unitaires_vecteur()
@@ -146,6 +146,11 @@ void Tests::tests_unitaires_canevas()
     c1.ajouterForme(new Cercle(3));
 
     c1.ajouterCouche(c1.getCouche(1));
+    std::cout << "Canevas de " << c1.nombreCouche() << " couches" << std::endl;
+
+
+    extern int conteurForme;
+    std::cout << conteurForme << " Formes" << std::endl;
     //c1.
 }
 

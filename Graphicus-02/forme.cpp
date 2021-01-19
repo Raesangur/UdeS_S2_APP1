@@ -9,14 +9,23 @@
 
 #include "forme.h"
 
+int conteurForme = 0;
+
+Forme::Forme()
+{
+conteurForme++;
+}
+
 Forme::Forme(int x1, int y1)
 {
     ancrage.x = x1;
     ancrage.y = y1;
+    conteurForme++;
 }
 
 Forme::~Forme()
 {
+    conteurForme--;
 }
 
 void Forme::translater(int deltaX, int deltaY)

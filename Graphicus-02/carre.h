@@ -8,7 +8,7 @@
 class Carre : public Rectangle
 {
 public:
-    Carre(double cote = 1, Coordonnee ancrage = {0, 0});
+    Carre(double c = 1, Coordonnee ancrage = {0, 0});
     ~Carre() = default;
 
     void   setCote(double valCote);
@@ -16,7 +16,4 @@ public:
 
     double aire() const override;
     void   afficher(std::ostream& s) const override;
-
-private:
-    double cote;
 };
