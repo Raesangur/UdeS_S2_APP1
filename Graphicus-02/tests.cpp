@@ -18,7 +18,7 @@
 
 static const char* PrintResult(bool val)
 {
-    return b_val ? "Succès" : "Échec";
+    return val ? "Succès" : "Échec";
 }
 
 
@@ -175,10 +175,6 @@ void Tests::tests_unitaires_canevas()
 
     c1.ajouterCouche(c1.getCouche(1));
     std::cout << "Canevas de " << c1.nombreCouche() << " couches" << std::endl;
-
-
-    extern int conteurForme;
-    std::cout << conteurForme << " Formes" << std::endl;
     // c1.
 }
 
@@ -200,25 +196,104 @@ void Tests::tests_application()
 
 void Tests::tests_application_cas_01()
 {
-    std::cout << "TESTS APPLICATION (CAS 01)" << std::endl;
+    std::cout << "\nTESTS APPLICATION (CAS 01)" << std::endl;
     // Il faut ajouter les operations realisant ce scenario de test.
     Canevas c;
 
-    std::cout << "\n1. Activer la couche 1." << std::endl;
+    std::cout << "\n-------------------------\n1. Activer la couche 1." << std::endl;
     bool resultat = c.activerCouche(1);
+    std::cout << "Résultat: " << PrintResult(resultat) << std::endl;
+
+    std::cout << "\n-------------------------\n2. Ajouter trois formes géométriques (un rectangle, "
+                 "un carré et un cercle) "
+                 "avec des points d’ancrages différents."
+              << std::endl;
+    std::cout << "Ajout du rectangle (l = 4, h = 3.14, Coords: {10, 8}):\n";
+    resultat = c.ajouterForme(new Rectangle(4, 3.14, {10, 8}));
+    std::cout << "Résultat: " << PrintResult(resultat) << std::endl;
+    std::cout << "Ajout du carré (c = 5, Coords: {-5, 4}):\n";
+    resultat = c.ajouterForme(new Carre(5, {-5, 4}));
+    std::cout << "Résultat: " << PrintResult(resultat) << std::endl;
+    std::cout << "Ajout du cercle (r = 0.7978845, Coords: {12, 3}):\t // 0.7978845 = √(2/π)\n";
+    Cercle* pcer = new Cercle(0.7978845, {12, 3});
+    resultat     = c.ajouterForme(pcer);
+    std::cout << "Résultat: " << PrintResult(resultat) << std::endl;
+    std::cout << "Aire du cercle: " << pcer->aire() << std::endl;
+    std::cout << "\n-------------------------\n3. Activer la couche 2." << std::endl;
+    resultat = c.activerCouche(2);
     std::cout << "Résultat: " << PrintResult(resultat);
 
-    std::cout << "\n2. Ajouter trois formes géométriques (un rectangle, un carré et un cercle) avec des points d’ancrages différents." << std::endl;
-    std::cout << "Ajout du rectangle (l = 4, h = 3, Coords: {10, 8}:\n";
-    c.ajouterForme(new Rectangle(1, 3, {10, 8}));
-    std::cout << "Ajout du carré (c = 5, Coords: {-5, 4}:\n";
-    c.ajouterForme(new Carre(5, {-5, 4}));
-    std::cout << "Ajout du cercle (r = , Coords: {-5, 4}:\n";
+    std::cout << "\n-------------------------\n4. Ajouter une forme géométriques." << std::endl;
+    std::cout << "Copie du rectangle de la couche 1:\n";
+    resultat = c.ajouterForme(new Rectangle(c.getCouche(1).GetForme(0)));
+    std::cout << "Résultat: " << PrintResult(resultat);
 
+    std::cout << "\n-------------------------\n5. Afficher le canevas" << std::endl;
+    c.afficher(std::cout);
+
+    std::cout << "\n-------------------------\n6. Afficher l'aire du canevas." << std::endl;
+    std::cout << "Aire: " << c.aire() << std::endl;
+
+    std::cout << "\n-------------------------\n7. Activer la couche 0." << std::endl;
+    resultat = c.activerCouche(0);
+    std::cout << "Résultat: " << PrintResult(resultat) << std::endl;
+
+    std::cout << "\n-------------------------\n8. Ajouter trois formes géométriques différentes."
+              << std::endl;
+    std::cout << "Ajout d'un cercle (r = 2, Coords: {10, 8}):\n";
+    resultat = c.ajouterForme(new Cercle(2, {10, 8}));
+    std::cout << "Résultat: " << PrintResult(resultat) << std::endl;
+    std::cout << "Ajout d'un rectangle (l = 40, h = 0.01, Coords: {0, 1}):\n";
+    resultat = c.ajouterForme(new Rectangle(40, 0.01, {0, 1}));
+    std::cout << "Résultat: " << PrintResult(resultat) << std::endl;
+    std::cout << "Ajout d'un autre rectangle (l = 4, h = 3, Coords: {100, -5}):\n";
+    resultat = c.ajouterForme(new Rectangle(4, 3, {100, -5}));
+    std::cout << "Résultat: " << PrintResult(resultat) << std::endl;
+
+    std::cout << "\n-------------------------\n9. Cacher la couche 2." << std::endl;
+    resultat = c.cacherCouche(2);
+    std::cout << "Résultat: " << PrintResult(resultat) << std::endl;
+
+    std::cout << "\n-------------------------\n10. Activer la couche 1." << std::endl;
+    resultat = c.activerCouche(1);
+    std::cout << "Résultat: " << PrintResult(resultat) << std::endl;
+
+    std::cout << "\n-------------------------\n11. Translater la couche (12x + 4y)." << std::endl;
+    resultat = c.translater(12, 4);
+    std::cout << "Résultat: " << PrintResult(resultat) << std::endl;
+
+    std::cout << "\n-------------------------\n12. Afficher le canevas" << std::endl;
+    c.afficher(std::cout);
+
+    std::cout << "\n-------------------------\n13. Afficher l'aire du canevas." << std::endl;
+    std::cout << "Aire: " << c.aire() << std::endl;
+
+    std::cout << "\n-------------------------\n14. Retirer la première forme de la couche."
+              << std::endl;
+    resultat = c.retirerForme(0);
+    std::cout << "Résultat: " << PrintResult(resultat) << std::endl;
+
+    std::cout << "\n-------------------------\n15. Afficher le canevas" << std::endl;
+    c.afficher(std::cout);
+
+    std::cout << "\n-------------------------\n16. Afficher l'aire du canevas." << std::endl;
+    std::cout << "Aire: " << c.aire() << std::endl;
+
+    std::cout << "\n-------------------------\n17. Réinitialiser le canevas." << std::endl;
+    resultat = c.reinitialiser();
+    std::cout << "Résultat: " << PrintResult(resultat) << std::endl;
+
+    std::cout << "\n-------------------------\n18. Afficher le canevas" << std::endl;
+    c.afficher(std::cout);
+
+    std::cout << "\n-------------------------\n19. Afficher l'aire du canevas." << std::endl;
+    std::cout << "Aire: " << c.aire() << std::endl;
+
+    std::cout << "Fin du test d'application pour la validation!" << std::endl;
 }
 
 void Tests::tests_application_cas_02()
 {
-    std::cout << "TESTS APPLICATION (CAS 02)" << std::endl;
+    // std::cout << "TESTS APPLICATION (CAS 02)" << std::endl;
     // Il faut ajouter les operations realisant ce scenario de test.
 }

@@ -9,6 +9,7 @@ class Carre : public Rectangle
 {
 public:
     Carre(double c = 1, Coordonnee ancrage = {0, 0});
+    Carre(const Forme* f);
     ~Carre() = default;
 
     void   setCote(double valCote);

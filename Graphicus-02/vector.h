@@ -221,9 +221,9 @@ vector<ItemType, shouldDelete>::~vector()
 // Activée si le type est un pointeur (SFINAE)
 template<typename ItemType, bool shouldDelete>
 template<typename T, typename std::enable_if<std::is_pointer<T>::value, bool>::type>
-T vector<ItemType, shouldDelete>::operator[](size_t index) const
+const T vector<ItemType, shouldDelete>::operator[](size_t index) const
 {
-    if(index >= size())
+    if(index > size())
     {
         return nullptr;
     }

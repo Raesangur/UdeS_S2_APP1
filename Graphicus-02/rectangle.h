@@ -9,6 +9,7 @@ class Rectangle : public Forme
 public:
     // Creation rectangle : (L; H; ptAncrage) **Constructeur**
     Rectangle(double L = 1, double H = 1, Coordonnee ptAncrage = {0, 0});
+    Rectangle(const Forme* f);
 
     // Destructeur
     ~Rectangle() = default;
