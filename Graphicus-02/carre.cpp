@@ -4,24 +4,41 @@
 #include "rectangle.h"
 #include <cstddef>
 
-Carre::Carre(double cote, Coordonnee ptAncrage)
+Carre::Carre(double c, Coordonnee ptAncrage) : Rectangle(c, c, ptAncrage)
 {
-    setCote(cote);
-    setAncrage(ptAncrage);
 }
 
 void Carre::setCote(double valCote)
 {
-    cote = valCote;
+    largeur = valCote;
+    hauteur = valCote;
 }
 double Carre::getCote() const
 {
-    return cote;
+    return largeur;
+}
+
+void Carre::setLargeur(double l)
+{
+    setCote(l);
+}
+void Carre ::setHauteur(double h)
+{
+    setCote(h);
+}
+
+size_t Carre::getLargeur() const
+{
+    return getCote();
+}
+size_t Carre ::getHauteur() const
+{
+    return getCote();
 }
 
 double Carre::aire() const
 {
-    return cote * cote;
+    return hauteur * largeur;
 }
 
 void Carre::afficher(std::ostream& s) const

@@ -14,6 +14,8 @@
 #include "vector.h"
 #include <iostream>
 
+#define DEFAULT_COUCHES_NBR 5
+
 class Canevas
 {
 public:
@@ -37,7 +39,7 @@ public:
     void   afficher(std::ostream& s);
 
 private:
-    vector<Couche> m_couches{5};
+    vector<Couche> m_couches{DEFAULT_COUCHES_NBR};
     size_t         m_index = 0;
 };
 

@@ -8,6 +8,16 @@
 
 #include "couche.h"
 
+
+// Copy assignment operator
+Couche& Couche::operator=(const Couche& other)
+{
+    m_etat   = other.m_etat;
+    m_formes = other.m_formes;
+
+    return *this;
+}
+
 bool Couche::AjouterForme(Forme* pforme)
 {
     if(m_etat == Etat::Active)
@@ -19,6 +29,7 @@ bool Couche::AjouterForme(Forme* pforme)
         }
         catch(std::bad_alloc& ex)
         {
+            std::cout << "erreur lors de l'ajout d'une forme à la couche" << std::endl;
             return false;
         }
     }
@@ -51,7 +62,7 @@ size_t Couche::NombreForme() const
 
 double Couche::Aire() const
 {
-    if(m_etat == Etat::Cachee)
+    if(m_etat == Etat::Cachee || m_etat == Etat::Init)
     {
         return 0.0;
     }
@@ -100,7 +111,10 @@ bool Couche::Reinitialiser()
 
 void Couche::SetEtat(Etat nouvelEtat)
 {
-    m_etat = nouvelEtat;
+    if(nouvelEtat != Etat::Init)
+    {
+        m_etat = nouvelEtat;
+    }
 }
 Couche::Etat Couche::GetEtat() const
 {
@@ -109,19 +123,22 @@ Couche::Etat Couche::GetEtat() const
 
 void Couche::afficher(std::ostream& s) const
 {
-    if(m_etat != Etat::Init)
-    {
-        if(m_formes.size() == 0)
-        {
-            s << "Couche vide" << std::endl;
-        }
-        else
-        {
-            s << m_formes;
-        }
-    }
-    else
+    if(m_etat == Etat::Init)
     {
         s << "Couche initialisee" << std::endl;
+        return;
     }
+    if(m_etat == Etat::Cachee)
+    {
+        s << "Couche cachee" << std::endl;
+        return;
+    }
+    if(m_formes.size() == 0)
+    {
+        s << "Couche vide" << std::endl;
+        return;
+    }
+
+    // Opérateur de left-shift overload pour le vecteur pour faire l'affichage.
+    s << m_formes;
 }
