@@ -10,12 +10,30 @@ Carre::Carre(double c, Coordonnee ptAncrage) : Rectangle(c, c, ptAncrage)
 
 void Carre::setCote(double valCote)
 {
-   largeur = valCote;
-   hauteur = valCote;
+    largeur = valCote;
+    hauteur = valCote;
 }
 double Carre::getCote() const
 {
     return largeur;
+}
+
+void Carre::setLargeur(double l)
+{
+    setCote(l);
+}
+void Carre ::setHauteur(double h)
+{
+    setCote(h);
+}
+
+size_t Carre::getLargeur() const
+{
+    return getCote();
+}
+size_t Carre ::getHauteur() const
+{
+    return getCote();
 }
 
 double Carre::aire() const

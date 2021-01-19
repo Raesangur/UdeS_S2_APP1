@@ -42,3 +42,7 @@ carre.o: carre.cpp carre.h rectangle.o
 # Cleaning up
 clean:
 	rm -f *.o
+
+# clang-format
+format:
+	clang-format -i graphicus.cpp tests.h tests.cpp canevas.cpp canevas.h forme.cpp forme.h coordonnee.h couche.cpp couche.h vector.h carre.cpp carre.h rectangle.cpp rectangle.h cercle.cpp cercle.h

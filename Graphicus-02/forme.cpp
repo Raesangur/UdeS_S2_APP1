@@ -13,7 +13,7 @@ int conteurForme = 0;
 
 Forme::Forme()
 {
-conteurForme++;
+    conteurForme++;
 }
 
 Forme::Forme(int x1, int y1)

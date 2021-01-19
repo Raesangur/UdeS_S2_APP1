@@ -11,18 +11,21 @@
 
 Canevas::Canevas()
 {
+    m_couches[0].SetEtat(Couche::Etat::Active);
 }
 
 Canevas::~Canevas()
 {
-   std::cout << m_couches.size() << std::endl;
+    std::cout << m_couches.size() << std::endl;
 }
 
 bool Canevas::reinitialiser()
 {
     m_index = 0;
     m_couches.clear();
-    return true;
+    bool status = m_couches.push_back(Couche(), DEFAULT_COUCHES_NBR);
+    m_couches[0].SetEtat(Couche::Etat::Active);
+    return status;
 }
 
 bool Canevas::activerCouche(size_t index)
@@ -31,8 +34,13 @@ bool Canevas::activerCouche(size_t index)
     {
         return false;
     }
-    m_couches[m_index].SetEtat(Couche::Etat::Inactive);
-    m_couches[m_index = index].SetEtat(Couche::Etat::Active);
+    if(m_couches[m_index].GetEtat() == Couche::Etat::Active)
+    {
+        m_couches[m_index].SetEtat(Couche::Etat::Inactive);
+    }
+
+    m_index = index;
+    m_couches[m_index].SetEtat(Couche::Etat::Active);
     return true;
 }
 
@@ -62,9 +70,20 @@ bool Canevas::ajouterCouche(const Couche& couche)
 }
 bool Canevas::enleverCouche(size_t index)
 {
+    if(nombreCouche() == 1)
+    {
+        // Il doit au minimum y avoir une couche!
+        m_couches[0].Reinitialiser();
+        return false;
+    }
+
     if(index < nombreCouche())
     {
         m_couches.remove(index);
+        if(m_index == nombreCouche())
+        {
+            m_index--;
+        }
         return true;
     }
     else
@@ -98,7 +117,7 @@ bool Canevas::ajouterForme(Forme* p_forme)
 
 bool Canevas::retirerForme(size_t index)
 {
-    return m_couches[m_index].RetirerForme(index);
+    return m_couches[m_index].RetirerForme(index) == nullptr ? false : true;
 }
 
 double Canevas::aire()
@@ -106,13 +125,8 @@ double Canevas::aire()
     double aireTotale;
     for(const Couche& c : m_couches)
     {
-        if(c.GetEtat() != Couche::Etat::Cachee)
-        {
-        }
-        else
-        {
-            aireTotale += c.Aire();
-        }
+        // On skip les couches cachées (dans la méthode Aire de la couche en tant que telle)
+        aireTotale += c.Aire();
     }
 
     return aireTotale;
@@ -121,11 +135,9 @@ double Canevas::aire()
 bool Canevas::translater(int deltaX, int deltaY)
 {
     Couche& c = m_couches[m_index];
-    if(c.GetEtat() == Couche::Etat::Active)
-    {
-        return c.Translater(deltaX, deltaY);
-    }
-    return true;
+
+    // Il y a vérification de l'état actif dans translater
+    return c.Translater(deltaX, deltaY);
 }
 
 void Canevas::afficher(std::ostream& s)

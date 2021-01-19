@@ -11,7 +11,7 @@
 
 int main()
 {
-    std::cout << "\nDébut de graphicus-02:\n" << std::endl; // (oui deux retours de ligne)
+    std::cout << "\nDébut de graphicus-02:\n" << std::endl;    // (oui deux retours de ligne)
 
     Tests tests;
 
