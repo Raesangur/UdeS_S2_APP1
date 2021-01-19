@@ -88,8 +88,8 @@ void vector<ItemType, shouldDelete>::m_reallocate(size_t newCapacity)
 {
     // Allocation du nouvea bloc de mémoire
     // L'utilisation de operator new au lieu de simplement new permet d'allouer un bloc de mémoire
-    // sans faire appel au constructeur de l'objet Construire les objets ne serait pas pertinent vu
-    // qu'ils se font overriter immédiatement après.
+    // sans faire appel au constructeur de l'objet.
+    // Construire les objets ne serait pas pertinent vu qu'ils se font overwriter immédiatement après par des copies.
     ItemType* newData    = static_cast<ItemType*>(operator new[](sizeof(ItemType) * newCapacity));
     size_t    copiedSize = std::min(newCapacity, size());
     resize(copiedSize);
@@ -141,6 +141,8 @@ void vector<ItemType, shouldDelete>::m_removeElements(Iterator itBegin, Iterator
         }
         else
         {
+            // Si l'espace mémoire se fait désallouer par `delete[]` les destructeurs se font
+            // automatiquement appeller! 
             // it->~ItemType();
         }
     }

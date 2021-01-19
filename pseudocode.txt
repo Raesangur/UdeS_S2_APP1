@@ -1,0 +1,59 @@
+// Variables globales:
+// débutPointeur(pointeur) : Pointeur vers le début de l'espace mémoire alloué
+// finPointeur(pointeur) :   Pointeur vers l'élément suivant le dernier élément dans l'espace mémoire alloué
+// capacité(entier) :        Taille totale de l'espace mémoire présentement alloué
+
+FONCTION AjoutElement(valeur) : succès
+	// valeur(pointeur) : Pointeur vers le nouvel élément à ajouter au vecteur
+	// succès(booléen) : Résultat si l'élément a réussi à être ajouté
+DÉBUT
+	// Il n'y a pas la place pour le nouvel élément
+	SI Taille() + 1 > capacité ALORS
+		// On alloue un bloc de mémoire 2 fois plus grand
+		succès = Réallouer(capacité * 2)
+
+		// En cas d'échec de réallocation, retourner immédiatement
+		SI succès = faux
+			Retourner succès
+
+	// Incrire la nouvelle valeur à la fin du tableau
+	Écrire valeur dans finPointeur
+	finPointeur:= finPointeur + 1
+	succès = vrai
+	Retourner succès
+FIN
+
+// Cette fonction en pseudocode ne s'attaque qu'au scénario où la capacité augmente, mais elle pourrait diminuer.
+FONCTION Réallouer(nouvelleCapacité) : succès
+	// Alloue un nouveau bloc de mémoire, copie les éléments de l'ancien bloc vers le nouveau bloc, et supprime l'ancien bloc
+	// nouvelleCapacité(entier) : Taille du nouveau bloc mémoire
+	// succès(booléen) :          Résultat si le nouveau bloc mémoire a pu être alloué
+DÉBUT
+	// nouveauBloc(pointeur) : Pointeur vers le nouveau bloc mémoire
+
+	nouveauBloc := Alloue nouvelleCapacité dans la mémoire dynamique
+
+	SI nouveauBloc = 0
+		// Il y a eu une erreur dans l'allocation du bloc mémoire
+		succès = faux
+		Retourne succès
+
+	// Copie les données de l'ancien bloc vers le nouveau bloc
+	POUR toutes les valeurs de l'ancien bloc
+		Copie la valeur dans le nouveau bloc
+
+	Désalloue débutPointeur		// Supprime l'ancien bloc mémoire
+	débutPointeur := nouveauBloc
+	finPointeur := nouveauBloc + Taille()
+	capacité := nouvelleCapacité
+	succès = vrai
+	retourne succès
+FIN
+
+FONCTION Taille() : taille
+	// Retourne le nombre d'éléments dans le vecteur
+	// taille(entier) : nombre d'éléments dans le vecteur
+DÉBUT
+	taille := end - begin
+	Retourner taille
+FIN
