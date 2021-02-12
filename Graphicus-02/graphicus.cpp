@@ -6,6 +6,11 @@
  *    fichier fait partie de la distribution de Graphicus.
  ********/
 
+// APP1
+// Par:
+// Lachance Pascal-Emmanuel
+// Rivard Olivier
+
 #include "tests.h"
 #include "vector.h"
 
